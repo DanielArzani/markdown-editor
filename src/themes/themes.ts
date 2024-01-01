@@ -1,11 +1,21 @@
 export const lightTheme = {
+  headerBg: '#2B2D31',
+
   editorBody: '#FFFFFF',
   editorText: '#35393F',
+
+  saveBtnBg: '#E46643',
+  saveBtnText: '#FFFFFF',
 };
 
 export const darkTheme = {
+  headerBg: '#2B2D31',
+
   editorBody: '#1D1F22',
   editorText: '#C1C4CB',
+
+  saveBtnBg: '#E46643',
+  saveBtnText: '#FFFFFF',
 };
 
 // For creating global styles

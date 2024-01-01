@@ -90,10 +90,6 @@ select {
     GLOBAL TYPOGRAPHY
 ***************************/
 
-body {
-  background-color: lightgray;
-}
-
 body,
 button,
 input,
@@ -101,6 +97,10 @@ textarea,
 select {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+}
+
+button {
+  border: none;
 }
 
 h1 {

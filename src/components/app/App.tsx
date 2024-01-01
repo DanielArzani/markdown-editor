@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
-import styled from 'styled-components';
 
 import { darkTheme, lightTheme } from '../../themes/themes';
+import Header from '../Header';
 
 /**
  * Markdown Editor App
@@ -21,17 +21,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <div className={theme}>
-        <H1 className=''>Markdown Editor</H1>
+      <div className={`theme-${theme}`}>
+        <Header></Header>
+        <button onClick={toggleTheme}>Toggle Theme</button>
       </div>
-      <button onClick={toggleTheme}>Toggle Theme</button>
     </ThemeProvider>
   );
 }
 
 export default App;
-
-const H1 = styled.h1`
-  color: ${(props) => props.theme.editorText};
-  font-size: 78px;
-`;

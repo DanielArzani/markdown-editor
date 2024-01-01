@@ -26,8 +26,14 @@ const Button = styled.button`
 
   background-color: ${(props) => props.theme.saveBtnBg};
   border-radius: 5px;
+  color: ${(props) => props.theme.saveBtnText};
   height: 2.5rem;
   width: 2.5rem;
+
+  &:hover {
+    background-color: ${(props) => props.theme.saveBtnBgHover};
+    color: ${(props) => props.theme.saveBtnTextHover};
+  }
 
   @media ${media.md} {
     width: 9.5rem;
@@ -40,7 +46,7 @@ const Span = styled.span`
   @media ${media.md} {
     display: inline;
 
-    color: ${(props) => props.theme.saveBtnText};
+    color: inherit;
     font-family: Roboto;
     font-size: 0.9375rem;
     font-style: normal;

@@ -101,6 +101,7 @@ select {
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 h1 {

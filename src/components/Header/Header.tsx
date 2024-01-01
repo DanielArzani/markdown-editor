@@ -33,6 +33,7 @@ const StyledHeader = styled.header`
   background-color: ${(props) => props.theme.headerBg};
   border: 1px solid black;
   max-width: 90rem;
+  margin-inline: auto;
   padding-inline-end: 0.5rem;
 
   @media ${media.md} {

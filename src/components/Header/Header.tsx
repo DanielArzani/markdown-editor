@@ -31,7 +31,9 @@ function Header() {
       </div>
 
       <div>
-        <img src={deleteIcon} alt='Delete Icon' />
+        <DeleteIconWrapper>
+          <img src={deleteIcon} alt='Delete Icon' />
+        </DeleteIconWrapper>
         <SaveButton />
       </div>
     </StyledHeader>
@@ -60,6 +62,11 @@ const StyledHeader = styled.header`
     align-items: center;
     gap: 1rem;
   }
+`;
+
+const DeleteIconWrapper = styled.button`
+  background: none;
+  border: none;
 `;
 
 const PlaceHolder2 = styled.div`

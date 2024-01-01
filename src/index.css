@@ -86,38 +86,12 @@ select {
     GLOBAL CSS
 *********************/
 
-/* Global Color Palette */
-:root {
-  :root {
-    --color-black: #151619;
-    --color-dark-gray: #1d1f22;
-    --color-gray: #2b2d31;
-    --color-light-gray: #5a6069;
-    --color-lighter-gray: #7c8187;
-    --color-lightest-gray: #c1c4cb;
-    --color-white: #ffffff;
-    --color-accent-dark: #e46643;
-    --color-accent-light: #f39765;
+/***************************
+    GLOBAL TYPOGRAPHY
+***************************/
 
-    /* Background colors */
-    --background-color-default: var(--color-white);
-    --background-color-light: var(--color-lightest-gray);
-
-    /* Text colors */
-    --text-color-primary: var(--color-black);
-    --text-color-secondary: var(--color-dark-gray);
-    --text-color-tertiary: var(--color-gray);
-
-    /* Interactive elements */
-    --button-idle-bg: var(--color-accent-dark);
-    --button-hover-bg: var(--color-accent-light);
-  }
-}
-
-/* Global Typography */
 body {
-  background-color: var(--background-color-default);
-  color: var(--text-color-primary);
+  background-color: lightgray;
 }
 
 body,
@@ -173,33 +147,6 @@ span {
   font-size: 14px;
   line-height: 24px; /* Providing line-height for better readability */
   font-weight: 400;
-}
-
-/***************************** 
-    INTERACTIVE ELEMENTS
-*****************************/
-button {
-  background-color: var(--button-idle-bg);
-  border: none;
-  color: var(--color-white);
-  cursor: pointer;
-  padding: 10px 20px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: var(--button-hover-bg);
-}
-
-input[type='text'],
-textarea {
-  border: 1px solid var(--color-gray-light);
-  padding: 8px;
-}
-
-input[type='text']:hover,
-textarea:hover {
-  border-color: var(--color-gray-dark);
 }
 
 /************************ 

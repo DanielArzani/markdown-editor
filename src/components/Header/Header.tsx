@@ -10,6 +10,7 @@ import media from '../../utils/mediaQueries';
 function Header() {
   return (
     <StyledHeader>
+      <h1 className='sr-only'>Markdown Editor</h1>
       <div>
         <PlaceHolder3 />
         <PlaceHolder2 />

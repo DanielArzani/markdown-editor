@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from 'react-modal';
 
 import Logo from '../Logo';
 import media from '../../utils/mediaQueries';
@@ -8,41 +9,65 @@ import SaveButton from '../SaveButton';
 import DeleteIcon from '../DeleteIcon';
 import DocumentName from '../DocumentName';
 
+// This line is important for screen readers to hide the main app when the modal is open
+Modal.setAppElement('#root');
+
 /**
- * The project header. Contains the components for creating, deleting and saving documents as well as the side navbar
+ * The project header. Contains the components for creating, deleting and saving documents as well as the side navbar. Also holds the logic for opening/closing the toggle menu and the confirm deletion modal
  */
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  // Toggles the menu open/close
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
-    <StyledHeader>
-      <MinorWrapper>
-        <Menu
-          isOpen={isMenuOpen}
-          toggleMenu={toggleMenu}
-          ariaControls='navigation'
-        />
+    <>
+      <StyledHeader>
+        <MinorWrapper>
+          <Menu
+            isOpen={isMenuOpen}
+            toggleMenu={toggleMenu}
+            ariaControls='navigation'
+          />
 
-        <LogoWrapper>
-          <Logo />
-          <Line />
-        </LogoWrapper>
+          <LogoWrapper>
+            <Logo />
+            <Line />
+          </LogoWrapper>
 
-        <DocumentNameWrapper>
-          <DocumentName />
-        </DocumentNameWrapper>
-      </MinorWrapper>
+          <DocumentNameWrapper>
+            <DocumentName />
+          </DocumentNameWrapper>
+        </MinorWrapper>
 
-      <MinorWrapper>
-        <DeleteIcon />
-        <SaveButton />
-      </MinorWrapper>
-    </StyledHeader>
+        <MinorWrapper>
+          <DeleteIcon openModal={openModal} />
+          <SaveButton />
+        </MinorWrapper>
+      </StyledHeader>
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel='Example Modal'
+      >
+        <h2>Hello</h2>
+        <button onClick={closeModal}>close</button>
+        <div>I am a modal!</div>
+      </Modal>
+    </>
   );
 }
 
@@ -88,3 +113,14 @@ const Line = styled.div`
   margin-left: 1rem;
   width: 0.0625rem;
 `;
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};

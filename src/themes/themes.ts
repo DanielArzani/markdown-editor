@@ -20,6 +20,15 @@ export const lightTheme = {
 
   editorBody: '#FFFFFF',
   editorText: '#35393F',
+
+  //*********************
+  //  MODAL COMPONENT
+  //*********************
+  modalBg: '#FFFFFF',
+  modalHeaderText: '#35393F',
+  modalContentText: '#7C8187',
+  modalBtnText: '#FFFFFF',
+  modalBtnBg: '#E46643',
 };
 
 export const darkTheme = {
@@ -44,6 +53,15 @@ export const darkTheme = {
 
   editorBody: '#1D1F22',
   editorText: '#C1C4CB',
+
+  //*********************
+  //  MODAL COMPONENT
+  //*********************
+  modalBg: '#1D1F22',
+  modalHeaderText: '#FFFFFF',
+  modalContentText: '#C1C4CB',
+  modalBtnText: '#FFFFFF',
+  modalBtnBg: '#E46643',
 };
 
 // For creating global styles

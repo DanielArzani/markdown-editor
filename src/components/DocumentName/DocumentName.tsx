@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import media from '../../utils/mediaQueries';
 
 /**
- * Component for re-naming a document. Also displays the current document name.
+ * Component for re-naming a document. Also displays the current document name. Has a stylistic bottom border
  */
 function DocumentName() {
   return (

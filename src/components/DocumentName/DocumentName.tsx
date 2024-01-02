@@ -17,6 +17,7 @@ function DocumentName() {
       <InputWrapper>
         <Label htmlFor='docName'>Document Name</Label>
         <Input type='text' id='docName' defaultValue='Welcome.md' />
+        <AnimatedBorder />
       </InputWrapper>
     </Wrapper>
   );
@@ -41,6 +42,7 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -50,6 +52,16 @@ const Label = styled.label`
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+`;
+
+const AnimatedBorder = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: ${(props) => props.theme.docNameInputText};
+  transition: width 0.3s ease-in-out;
 `;
 
 const Input = styled.input`
@@ -64,8 +76,8 @@ const Input = styled.input`
   outline: none;
   padding-bottom: 0.25rem;
 
-  &:focus {
-    border-bottom: 1px solid ${(props) => props.theme.docNameInputText};
+  &:focus + ${AnimatedBorder} {
+    width: 100%;
   }
 
   @media ${media.md} {

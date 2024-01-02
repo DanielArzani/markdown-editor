@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import closeIcon from '../../assets/icon-close.svg';
 import media from '../../utils/mediaQueries';
@@ -25,6 +26,11 @@ type MenuProps = {
     >
  */
 function Menu({ isOpen, toggleMenu, ariaControls }: MenuProps) {
+  const variants = {
+    open: { rotate: 180, opacity: 0 },
+    closed: { rotate: 0, opacity: 1 },
+  };
+
   return (
     <MenuIconContainer
       onClick={toggleMenu}
@@ -32,20 +38,27 @@ function Menu({ isOpen, toggleMenu, ariaControls }: MenuProps) {
       aria-expanded={isOpen}
       aria-controls={ariaControls}
     >
-      {isOpen ? (
-        // X Icon for open state
-        <MenuIconClose src={closeIcon} alt='Close Icon' />
-      ) : (
-        // Hamburger Icon for closed state
-        <MenuIconOpen src={MenuIcon} alt='Menu Icon' />
-      )}
+      <MenuIconOpen
+        as={motion.img}
+        src={MenuIcon}
+        alt='Menu Icon'
+        animate={isOpen ? 'open' : 'closed'}
+        variants={variants}
+      />
+      <MenuIconClose
+        as={motion.img}
+        src={closeIcon}
+        alt='Close Icon'
+        animate={isOpen ? 'closed' : 'open'}
+        variants={variants}
+      />
     </MenuIconContainer>
   );
 }
 
 export default Menu;
 
-const MenuIconContainer = styled.button`
+const MenuIconContainer = styled(motion.button)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,6 +69,9 @@ const MenuIconContainer = styled.button`
   background-color: ${(props) => props.theme.menuBtnBg};
   height: 3.5rem;
   width: 3.5rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 
   &:hover {
     background-color: ${(props) => props.theme.menuBtnBgHover};
@@ -68,18 +84,22 @@ const MenuIconContainer = styled.button`
 `;
 
 const MenuIconOpen = styled.img`
+  position: absolute;
   height: 1rem;
   width: 1.5rem;
+  transition: opacity 0.3s ease;
 
   @media ${media.md} {
     height: 1.125rem;
     width: 1.875rem;
   }
 `;
-
 const MenuIconClose = styled.img`
+  position: absolute;
   height: 1.5rem;
   width: 1.5rem;
+
+  transition: opacity 0.3s ease;
 
   @media ${media.md} {
     height: 2rem;

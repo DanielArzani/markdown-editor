@@ -6,6 +6,7 @@ import Logo from '../Logo';
 import media from '../../utils/mediaQueries';
 import Menu from '../MenuIcon/Menu';
 import SaveButton from '../SaveButton';
+import DeleteIcon from '../DeleteIcon';
 
 /**
  * The project header. Contains the components for creating, deleting and saving documents as well as the side navbar
@@ -34,7 +35,7 @@ function Header() {
 
       <Wrapper>
         <DeleteIconWrapper>
-          <img src={deleteIcon} alt='Delete Icon' />
+          <DeleteIcon />
         </DeleteIconWrapper>
         <SaveButton />
       </Wrapper>
@@ -75,6 +76,10 @@ const LogoWrapper = styled.div`
 `;
 
 const DeleteIconWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background: none;
   border: none;
 `;

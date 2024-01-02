@@ -2,7 +2,9 @@ export const lightTheme = {
   headerBg: '#2B2D31',
 
   menuBtnBg: '#35393F',
-  menuBtnBgHover: '#5A6069',
+  menuBtnBgHover: '#E46643',
+
+  deleteIconHover: '#E46643',
 
   saveBtnBg: '#E46643',
   saveBtnText: '#FFFFFF',
@@ -17,7 +19,9 @@ export const darkTheme = {
   headerBg: '#2B2D31',
 
   menuBtnBg: '#35393F',
-  menuBtnBgHover: '#5A6069',
+  menuBtnBgHover: '#E46643',
+
+  deleteIconHover: '#E46643',
 
   saveBtnBg: '#E46643',
   saveBtnText: '#FFFFFF',

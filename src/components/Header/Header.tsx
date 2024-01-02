@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// import menuIcon from '../../assets/icon-menu.svg';
-import media from '../../utils/mediaQueries';
-import SaveButton from '../SaveButton';
 import deleteIcon from '../../assets/icon-delete.svg';
+import Logo from '../Logo';
+import media from '../../utils/mediaQueries';
 import Menu from '../MenuIcon/Menu';
+import SaveButton from '../SaveButton';
 
 /**
  * The project header. Contains the components for creating, deleting and saving documents as well as the side navbar
@@ -21,21 +21,23 @@ function Header() {
   return (
     <StyledHeader>
       <h1 className='sr-only'>Markdown Editor</h1>
-      <div>
+      <Wrapper>
         <Menu
           isOpen={isMenuOpen}
           toggleMenu={toggleMenu}
           ariaControls='navigation'
         />
-        <PlaceHolder2 />
-      </div>
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+      </Wrapper>
 
-      <div>
+      <Wrapper>
         <DeleteIconWrapper>
           <img src={deleteIcon} alt='Delete Icon' />
         </DeleteIconWrapper>
         <SaveButton />
-      </div>
+      </Wrapper>
     </StyledHeader>
   );
 }
@@ -56,21 +58,23 @@ const StyledHeader = styled.header`
   @media ${media.md} {
     padding-inline-end: 1rem;
   }
+`;
 
-  & > div {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const LogoWrapper = styled.div`
+  display: none;
+
+  @media ${media.l} {
+    display: block;
   }
 `;
 
 const DeleteIconWrapper = styled.button`
   background: none;
   border: none;
-`;
-
-const PlaceHolder2 = styled.div`
-  width: 7.25rem;
-  height: 1.13rem;
-  background-color: red;
 `;

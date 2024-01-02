@@ -22,6 +22,11 @@ export const lightTheme = {
   editorText: '#35393F',
 
   //*********************
+  // SIDEBAR COMPONENT
+  //*********************
+  sidebarBg: '#1D1F22',
+
+  //*********************
   //  MODAL COMPONENT
   //*********************
   modalBg: '#FFFFFF',
@@ -53,6 +58,11 @@ export const darkTheme = {
 
   editorBody: '#1D1F22',
   editorText: '#C1C4CB',
+
+  //*********************
+  // SIDEBAR COMPONENT
+  //*********************
+  sidebarBg: '#1D1F22',
 
   //*********************
   //  MODAL COMPONENT

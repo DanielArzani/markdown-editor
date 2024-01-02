@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Logo from '../Logo';
@@ -8,16 +8,15 @@ import SaveButton from '../SaveButton';
 import DeleteIcon from '../DeleteIcon';
 import DocumentName from '../DocumentName';
 
+type HeaderProps = {
+  isMenuOpen: boolean;
+  toggleMenu: () => void;
+};
+
 /**
- * The project header. Contains the components for creating, deleting and saving documents as well as the side navbar. Also holds the logic for opening/closing the toggle menu
+ * The project header. Contains the components for deleting, re-naming and saving documents as well as the menu
  */
-function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
+function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
   return (
     <>
       <StyledHeader>
@@ -54,9 +53,9 @@ const StyledHeader = styled.header`
 
   background-color: ${(props) => props.theme.headerBg};
   border: 1px solid black;
-  max-width: 90rem;
   margin-inline: auto;
   padding-inline-end: 0.5rem;
+  width: 100%;
 
   @media ${media.md} {
     padding-inline-end: 1rem;

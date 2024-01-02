@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/**
+ * SVG Trash Can Icon wrapped in a button, moved into its own component in order to be able to easily alter its styles. May be changed into a re-usable component
+ */
 function DeleteIcon() {
   return (
     <DeleteIconWrapper>

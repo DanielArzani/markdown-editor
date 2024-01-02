@@ -7,6 +7,10 @@ export const lightTheme = {
   menuBtnBg: '#35393F',
   menuBtnBgHover: '#E46643',
 
+  docNameLabel: '#7C8187',
+  docNameInputText: '#FFFFFF',
+  docNameInputBg: '#2B2D31',
+
   deleteIconHover: '#E46643',
 
   saveBtnBg: '#E46643',
@@ -26,6 +30,10 @@ export const darkTheme = {
 
   menuBtnBg: '#35393F',
   menuBtnBgHover: '#E46643',
+
+  docNameLabel: '#7C8187',
+  docNameInputText: '#FFFFFF',
+  docNameInputBg: '#2B2D31',
 
   deleteIconHover: '#E46643',
 

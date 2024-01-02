@@ -6,6 +6,7 @@ import media from '../../utils/mediaQueries';
 import Menu from '../MenuIcon/Menu';
 import SaveButton from '../SaveButton';
 import DeleteIcon from '../DeleteIcon';
+import DocumentName from '../DocumentName';
 
 /**
  * The project header. Contains the components for creating, deleting and saving documents as well as the side navbar
@@ -20,21 +21,27 @@ function Header() {
 
   return (
     <StyledHeader>
-      <Wrapper>
+      <MinorWrapper>
         <Menu
           isOpen={isMenuOpen}
           toggleMenu={toggleMenu}
           ariaControls='navigation'
         />
+
         <LogoWrapper>
           <Logo />
+          <Line />
         </LogoWrapper>
-      </Wrapper>
 
-      <Wrapper>
+        <DocumentNameWrapper>
+          <DocumentName />
+        </DocumentNameWrapper>
+      </MinorWrapper>
+
+      <MinorWrapper>
         <DeleteIcon />
         <SaveButton />
-      </Wrapper>
+      </MinorWrapper>
     </StyledHeader>
   );
 }
@@ -57,16 +64,27 @@ const StyledHeader = styled.header`
   }
 `;
 
-const Wrapper = styled.div`
+const MinorWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
 `;
 
+const DocumentNameWrapper = styled.div``;
+
 const LogoWrapper = styled.div`
   display: none;
 
   @media ${media.l} {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+`;
+
+const Line = styled.div`
+  background-color: #5a6069;
+  height: 2.5rem;
+  margin-left: 1rem;
+  width: 0.0625rem;
 `;

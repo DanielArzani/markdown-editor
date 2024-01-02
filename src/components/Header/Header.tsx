@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import deleteIcon from '../../assets/icon-delete.svg';
 import Logo from '../Logo';
 import media from '../../utils/mediaQueries';
 import Menu from '../MenuIcon/Menu';
@@ -21,7 +20,6 @@ function Header() {
 
   return (
     <StyledHeader>
-      <h1 className='sr-only'>Markdown Editor</h1>
       <Wrapper>
         <Menu
           isOpen={isMenuOpen}
@@ -34,9 +32,7 @@ function Header() {
       </Wrapper>
 
       <Wrapper>
-        <DeleteIconWrapper>
-          <DeleteIcon />
-        </DeleteIconWrapper>
+        <DeleteIcon />
         <SaveButton />
       </Wrapper>
     </StyledHeader>
@@ -73,13 +69,4 @@ const LogoWrapper = styled.div`
   @media ${media.l} {
     display: block;
   }
-`;
-
-const DeleteIconWrapper = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: none;
-  border: none;
 `;

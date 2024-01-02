@@ -1,4 +1,7 @@
 export const lightTheme = {
+  //*********************
+  //  HEADER COMPONENT
+  //*********************
   headerBg: '#2B2D31',
 
   menuBtnBg: '#35393F',
@@ -16,6 +19,9 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
+  //*********************
+  //  HEADER COMPONENT
+  //*********************
   headerBg: '#2B2D31',
 
   menuBtnBg: '#35393F',

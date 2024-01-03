@@ -21,6 +21,10 @@ type SideBarProps = {
  * @param children
  */
 function Sidebar({ isMenuOpen, children }: SideBarProps) {
+  if (!isMenuOpen) {
+    return <Wrapper aria-hidden={isMenuOpen ? false : true}></Wrapper>;
+  }
+
   return (
     <Wrapper aria-hidden={isMenuOpen ? false : true}>
       <LogoHeader isMenuOpen={isMenuOpen}>
@@ -31,7 +35,7 @@ function Sidebar({ isMenuOpen, children }: SideBarProps) {
         <NewDocumentButton />
         <DocumentsList />
       </Nav>
-      <ChildrenWrapper>{children}</ChildrenWrapper>
+      {children}
     </Wrapper>
   );
 }

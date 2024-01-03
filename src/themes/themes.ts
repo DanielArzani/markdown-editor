@@ -38,6 +38,12 @@ export const lightTheme = {
   modalContentText: '#7C8187',
   modalBtnText: '#FFFFFF',
   modalBtnBg: '#E46643',
+
+  //*********************
+  //  THEME SWITCHER
+  //*********************
+  themeSvgDefault: '#5A6069',
+  themeSvgActive: '#FFFFFF',
 };
 
 export const darkTheme = {
@@ -80,6 +86,12 @@ export const darkTheme = {
   modalContentText: '#C1C4CB',
   modalBtnText: '#FFFFFF',
   modalBtnBg: '#E46643',
+
+  //*********************
+  //  THEME SWITCHER
+  //*********************
+  themeSvgDefault: '#5A6069',
+  themeSvgActive: '#FFFFFF',
 };
 
 // For creating global styles

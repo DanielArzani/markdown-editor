@@ -4,6 +4,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../../themes/themes';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
+import ThemeToggle from '../ThemeToggle';
+import { AvailableThemes } from '../../types/availableThemes';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -13,7 +15,7 @@ type WrapperProps = {
  * Markdown Editor App
  */
 function App() {
-  const [theme, setTheme] = useState<string>('light');
+  const [theme, setTheme] = useState<AvailableThemes>('light');
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   // controls the menu
@@ -22,20 +24,17 @@ function App() {
   };
 
   // controls the theme
-  const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('light');
-    }
+  const handleThemeChange = (newTheme: AvailableThemes) => {
+    setTheme(newTheme);
   };
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
         <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
-        <Sidebar isMenuOpen={isMenuOpen} />
-        {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
+        <Sidebar isMenuOpen={isMenuOpen}>
+          <ThemeToggle theme={theme} onChange={handleThemeChange} />
+        </Sidebar>
       </Wrapper>
     </ThemeProvider>
   );

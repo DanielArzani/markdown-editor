@@ -12,13 +12,15 @@ type LogoHeaderProps = {
 
 type SideBarProps = {
   isMenuOpen: boolean;
+  children: React.ReactNode;
 };
 
 /**
  *  A sidebar containing saved documents, the component to create a new document and the theme controller.
  * @param isMenuOpen - Used to toggle aria-hidden in order to hide content from screen readers when menu is closed
+ * @param children
  */
-function Sidebar({ isMenuOpen }: SideBarProps) {
+function Sidebar({ isMenuOpen, children }: SideBarProps) {
   return (
     <Wrapper aria-hidden={isMenuOpen ? false : true}>
       <LogoHeader isMenuOpen={isMenuOpen}>
@@ -29,6 +31,7 @@ function Sidebar({ isMenuOpen }: SideBarProps) {
         <NewDocumentButton />
         <DocumentsList />
       </Nav>
+      <ChildrenWrapper>{children}</ChildrenWrapper>
     </Wrapper>
   );
 }
@@ -40,6 +43,7 @@ const Wrapper = styled.aside`
   height: 100%;
   overflow-x: hidden;
   padding-inline: 1rem;
+  position: relative;
   width: 100%;
 `;
 
@@ -71,3 +75,5 @@ const Nav = styled.nav`
   height: 80%;
   overflow-y: scroll;
 `;
+
+const ChildrenWrapper = styled.div``;

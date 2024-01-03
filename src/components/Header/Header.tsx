@@ -55,6 +55,7 @@ const StyledHeader = styled.header`
   border: 1px solid black;
   margin-inline: auto;
   padding-inline-end: 0.5rem;
+  overflow-x: scroll;
   width: 100%;
 
   @media ${media.md} {
@@ -66,6 +67,10 @@ const MinorWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  & > button {
+    flex-shrink: 0;
+  }
 `;
 
 const LogoWrapper = styled.div`

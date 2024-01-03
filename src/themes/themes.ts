@@ -25,6 +25,10 @@ export const lightTheme = {
   // SIDEBAR COMPONENT
   //*********************
   sidebarBg: '#1D1F22',
+  sidebarText: '#FFFFFF',
+  sidebarTextHover: '#E46643',
+  sidebarHeader: '#7C8187',
+  sidebarTime: '#7C8187',
 
   //*********************
   //  MODAL COMPONENT
@@ -63,6 +67,10 @@ export const darkTheme = {
   // SIDEBAR COMPONENT
   //*********************
   sidebarBg: '#1D1F22',
+  sidebarHeader: '#7C8187',
+  sidebarText: '#FFFFFF',
+  sidebarTextHover: '#E46643',
+  sidebarTime: '#7C8187',
 
   //*********************
   //  MODAL COMPONENT

@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Logo from '../Logo';
 import NewDocumentButton from '../NewDocumentButton';
 import DocumentsList from '../DocumentsList';
+import media from '../../utils/mediaQueries';
+
+type LogoHeaderProps = {
+  isMenuOpen: boolean;
+};
 
 type SideBarProps = {
   isMenuOpen: boolean;
@@ -15,12 +21,14 @@ type SideBarProps = {
 function Sidebar({ isMenuOpen }: SideBarProps) {
   return (
     <Wrapper aria-hidden={isMenuOpen ? false : true}>
-      <HeadWrapper>
+      <LogoHeader isMenuOpen={isMenuOpen}>
         <Logo />
-        <AltTitle style={{ color: 'white' }}>my documents</AltTitle>
-      </HeadWrapper>
-      <NewDocumentButton />
-      <DocumentsList />
+      </LogoHeader>
+      <Nav>
+        <H2>MY DOCUMENTS</H2>
+        <NewDocumentButton />
+        <DocumentsList />
+      </Nav>
     </Wrapper>
   );
 }
@@ -28,29 +36,38 @@ function Sidebar({ isMenuOpen }: SideBarProps) {
 export default Sidebar;
 
 const Wrapper = styled.aside`
-  /* display: flex;
-  flex-direction: column; */
-
   background-color: ${(props) => props.theme.sidebarBg};
   height: 100%;
   overflow-x: hidden;
-  padding: 1rem;
+  padding-inline: 1rem;
   width: 100%;
+`;
 
-  /* DELETE LATER */
-  & * {
-    color: white;
+const LogoHeader = styled.header<LogoHeaderProps>`
+  margin-top: 1.8rem;
+
+  @media ${media.l} {
+    display: none;
   }
 `;
 
-const HeadWrapper = styled.div``;
+const H2 = styled.h2`
+  margin-top: 1.8rem;
 
-const AltTitle = styled.h2`
+  color: ${(props) => props.theme.sidebarHeader};
   font-family: Roboto;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
   letter-spacing: 0.125rem;
-  text-transform: uppercase;
+  line-height: normal;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+
+  height: 80%;
+  overflow-y: scroll;
 `;

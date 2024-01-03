@@ -46,12 +46,34 @@ const InputWrapper = styled.div`
 `;
 
 const Label = styled.label`
-  color: ${(props) => props.theme.docNameLabel};
-  font-family: Roboto;
-  font-size: 0.8125rem;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
+  /* make it visually hidden but not hidden to screen readers */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+
+  @media ${media.md} {
+    /* undo-ing the above styles */
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+
+    color: ${(props) => props.theme.docNameLabel};
+    font-family: Roboto;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
 `;
 
 const AnimatedBorder = styled.div`

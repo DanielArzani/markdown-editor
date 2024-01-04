@@ -79,5 +79,3 @@ const Nav = styled.nav`
   height: 80%;
   overflow-y: scroll;
 `;
-
-const ChildrenWrapper = styled.div``;

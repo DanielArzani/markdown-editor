@@ -14,7 +14,10 @@ const MarkdownEditor = ({
   handleMarkdownChange,
 }: MarkdownEditorProps) => {
   return (
-    <>
+    <Wrapper>
+      <Header>
+        <H2>markdown</H2>
+      </Header>
       <EditorContainer>
         <StyledTextarea
           value={markdown}
@@ -23,19 +26,47 @@ const MarkdownEditor = ({
           aria-label='Markdown editor'
         />
       </EditorContainer>
-    </>
+    </Wrapper>
   );
 };
 
 export default MarkdownEditor;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.header`
+  display: flex;
+  align-items: center;
+
+  background-color: ${(props) => props.theme.editorHeaderBg};
+  height: 1rem;
+  padding: 1.5rem;
+`;
+
+const H2 = styled.h2`
+  color: ${(props) => props.theme.editorHeaderText};
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+`;
+
 const EditorContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+
+  height: calc(100% - 2rem);
 `;
 
 const StyledTextarea = styled.textarea`
+  background-color: ${(props) => props.theme.editorBodyBg};
+  color: ${(props) => props.theme.editorBodyText};
   width: 100%;
   height: 100%;
   border: none;
@@ -43,8 +74,6 @@ const StyledTextarea = styled.textarea`
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro',
     monospace;
   font-size: 1rem;
-  background-color: #f7f7f7; // Choose appropriate color based on theme
-  color: #333; // Choose appropriate text color based on theme
   line-height: 1.5;
   resize: none; // Optional: set to vertical, horizontal, or none
 

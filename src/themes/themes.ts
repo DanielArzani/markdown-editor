@@ -18,9 +18,6 @@ export const lightTheme = {
   saveBtnBgHover: '#F39765',
   saveBtnTextHover: '#FFFFFF',
 
-  editorBody: '#FFFFFF',
-  editorText: '#35393F',
-
   //*********************
   // SIDEBAR COMPONENT
   //*********************
@@ -44,6 +41,14 @@ export const lightTheme = {
   //*********************
   themeSvgDefault: '#5A6069',
   themeSvgActive: '#FFFFFF',
+
+  //*********************
+  //  MARKDOWN EDITOR
+  //*********************
+  editorHeaderText: '#7C8187',
+  editorHeaderBg: '#F5F5F5',
+  editorBodyText: '#35393F',
+  editorBodyBg: '#FFFFFF',
 };
 
 export const darkTheme = {
@@ -65,9 +70,6 @@ export const darkTheme = {
   saveBtnText: '#FFFFFF',
   saveBtnBgHover: '#F39765',
   saveBtnTextHover: '#FFFFFF',
-
-  editorBody: '#1D1F22',
-  editorText: '#C1C4CB',
 
   //*********************
   // SIDEBAR COMPONENT
@@ -92,6 +94,14 @@ export const darkTheme = {
   //*********************
   themeSvgDefault: '#5A6069',
   themeSvgActive: '#FFFFFF',
+
+  //*********************
+  //  MARKDOWN EDITOR
+  //*********************
+  editorHeaderText: '#C1C4CB',
+  editorHeaderBg: '#1D1F22',
+  editorBodyText: '#C1C4CB',
+  editorBodyBg: '#151619',
 };
 
 // For creating global styles
@@ -100,6 +110,7 @@ globalStyles.ts
 
 import { createGlobalStyle } from 'styled-components';
 
+
 export const GlobalStyles = createGlobalStyle`
   body {
     background-color: ${props => props.theme.body};
@@ -107,7 +118,6 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
   }
 `;
-
   In your App.ts, include the global style
 
 import { GlobalStyles } from './globalStyles';

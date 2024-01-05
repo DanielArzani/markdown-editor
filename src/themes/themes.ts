@@ -49,6 +49,7 @@ export const lightTheme = {
   editorHeaderBg: '#F5F5F5',
   editorBodyText: '#35393F',
   editorBodyBg: '#FFFFFF',
+  editorSeparator: '#E4E4E4',
 };
 
 export const darkTheme = {
@@ -102,6 +103,7 @@ export const darkTheme = {
   editorHeaderBg: '#1D1F22',
   editorBodyText: '#C1C4CB',
   editorBodyBg: '#151619',
+  editorSeparator: '#5A6069',
 };
 
 // For creating global styles

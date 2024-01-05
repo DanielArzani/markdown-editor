@@ -35,6 +35,10 @@ export default MarkdownEditor;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  position: relative;
+
+  border-right: 1px solid ${(props) => props.theme.editorSeparator};
 `;
 
 const Header = styled.header`

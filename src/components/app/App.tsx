@@ -72,6 +72,7 @@ const Wrapper = styled.div<WrapperProps>`
   height: 100vh;
   max-width: 90rem;
   margin: 0 auto;
+  position: relative;
   overflow-x: hidden;
 
   & > header {

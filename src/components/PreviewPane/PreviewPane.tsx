@@ -58,6 +58,8 @@ export default PreviewPane;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  background-color: ${(props) => props.theme.editorBodyBg};
   overflow: auto;
   height: 100%;
 `;
@@ -88,6 +90,8 @@ const MarkdownWrapper = styled.div`
 
   background-color: ${(props) => props.theme.editorBodyBg};
   height: 100%;
+  padding-left: 1rem;
+  padding-top: 1rem;
 
   & * {
     color: ${(props) => props.theme.editorBodyText};

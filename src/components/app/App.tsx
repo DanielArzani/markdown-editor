@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
+import { Resizable } from 're-resizable';
 
 import { darkTheme, lightTheme } from '../../themes/themes';
 import Header from '../Header';
@@ -8,6 +9,15 @@ import ThemeToggle from '../ThemeToggle';
 import { AvailableThemes } from '../../types/availableThemes';
 import MarkdownEditor from '../MarkdownEditor';
 import PreviewPane from '../PreviewPane';
+
+// styles for the re-sizable pane component
+const style = {
+  display: 'grid',
+  'grid-template-columns': '1fr 1fr',
+  'grid-template-rows': '1fr',
+  height: '100%',
+  overflow: 'hidden',
+};
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -47,12 +57,14 @@ function App() {
           <ThemeToggle theme={theme} onChange={handleThemeChange} />
         </Sidebar>
 
-        <MarkdownEditor
-          markdown={markdown}
-          handleMarkdownChange={handleMarkdownChange}
-        />
+        <Resizable style={style}>
+          <MarkdownEditor
+            markdown={markdown}
+            handleMarkdownChange={handleMarkdownChange}
+          />
 
-        <PreviewPane markdown={markdown} />
+          <PreviewPane markdown={markdown} />
+        </Resizable>
       </Wrapper>
     </ThemeProvider>
   );
@@ -64,9 +76,7 @@ const Wrapper = styled.div<WrapperProps>`
   display: grid;
   grid-template-rows: 74px 1fr;
   grid-template-columns: ${(props) =>
-    props.isMenuOpen
-      ? '15.625rem min(43rem, 100%) 1fr'
-      : '0px min(43rem, 100%) 1fr'};
+    props.isMenuOpen ? `15.625rem 1fr` : '0px 1fr'};
   transition: grid-template-columns 0.3s;
 
   height: 100vh;
@@ -89,12 +99,7 @@ const Wrapper = styled.div<WrapperProps>`
   }
 
   & > :nth-child(3) {
-    grid-column: 2/3;
-    grid-row: 2/3;
-  }
-
-  & > :nth-child(4) {
-    grid-column: 3/4;
+    grid-column: 2/-1;
     grid-row: 2/3;
   }
 `;

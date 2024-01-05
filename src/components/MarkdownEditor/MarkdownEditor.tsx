@@ -36,9 +36,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  position: relative;
-
   border-right: 1px solid ${(props) => props.theme.editorSeparator};
+  border-bottom: 10px solid ${(props) => props.theme.editorSeparator};
+  height: 100%;
 `;
 
 const Header = styled.header`
@@ -79,7 +79,7 @@ const StyledTextarea = styled.textarea`
     monospace;
   font-size: 1rem;
   line-height: 1.5;
-  resize: none; // Optional: set to vertical, horizontal, or none
+  resize: none;
 
   &:focus {
     outline: none; // Custom focus styles can be added

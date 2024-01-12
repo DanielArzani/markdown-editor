@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
 import { darkTheme, lightTheme } from '../../themes/themes';
@@ -8,6 +8,7 @@ import ThemeToggle from '../ThemeToggle';
 import { AvailableThemes } from '../../types/availableThemes';
 import MarkdownEditor from '../MarkdownEditor';
 import PreviewPane from '../PreviewPane';
+import { useResizableEditor } from '../../hooks/useResizableEditor';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -24,40 +25,14 @@ function App() {
   const [markdown, setMarkdown] = useState('');
   const [theme, setTheme] = useState<AvailableThemes>('light');
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [editorWidth, setEditorWidth] = useState<string>('50%'); // Initial editor width
 
-  useEffect(() => {
-    const handleResize = (e: MouseEvent) => {
-      const newWidth = e.clientX - (document.body.offsetLeft || 0);
-      // minimum width that the editor and can shrink to
-      const minWidth = 200;
-      if (newWidth > minWidth) {
-        setEditorWidth(`${newWidth}px`);
-      }
-    };
-
-    const startResizing = (e: MouseEvent) => {
-      e.preventDefault();
-      window.addEventListener('mousemove', handleResize);
-      window.addEventListener('mouseup', stopResizing);
-    };
-
-    const stopResizing = () => {
-      window.removeEventListener('mousemove', handleResize);
-      window.removeEventListener('mouseup', stopResizing);
-    };
-
-    const resizer = document.getElementById('resizer');
-    if (resizer) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      resizer.addEventListener('mousedown', startResizing as any);
-
-      return () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        resizer.removeEventListener('mousedown', startResizing as any);
-      };
-    }
-  }, []);
+  // for resizing the editor
+  const resizerRef = useRef<HTMLDivElement>(null);
+  const editorWidth = useResizableEditor({
+    initialWidth: '50%',
+    minWidth: 200,
+    resizerRef: resizerRef,
+  });
 
   // controls the menu
   const toggleMenu = () => {
@@ -90,7 +65,7 @@ function App() {
             markdown={markdown}
             handleMarkdownChange={handleMarkdownChange}
           />
-          <ResizeHandler id='resizer' />
+          <ResizeHandler ref={resizerRef} id='resizer' />
           <PreviewPane markdown={markdown} />
         </Main>
       </Wrapper>
@@ -133,14 +108,16 @@ const Main = styled.main<MainProps>`
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: ${(props) => props.editorWidth} 1px 1fr;
+  grid-template-columns: ${(props) => props.editorWidth} 2.5px 1fr;
 `;
 
+// the thing that is clicked on and dragged in order to resize a component
 const ResizeHandler = styled.div`
-  background-color: ${(props) => props.theme.editorSeparator};
-  width: 5px;
-  cursor: col-resize;
-  align-self: stretch;
   grid-column: 2;
   grid-row: 1;
+
+  align-self: stretch;
+  background-color: ${(props) => props.theme.editorSeparator};
+  cursor: col-resize;
+  width: 2.5px;
 `;

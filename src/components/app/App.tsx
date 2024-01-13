@@ -15,7 +15,7 @@ type WrapperProps = {
 };
 
 type MainProps = {
-  editorWidth: string;
+  width: string;
 };
 
 /**
@@ -26,15 +26,6 @@ function App() {
   const [theme, setTheme] = useState<AvailableThemes>('light');
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(true);
-
-  // for resizing the editor
-  const resizerRef = useRef<HTMLDivElement>(null);
-  const editorWidth = useResizableEditor({
-    initialWidth: '50%',
-    minWidth: 200,
-    resizerRef: resizerRef,
-    isPreviewOpen: isPreviewOpen,
-  });
 
   // controls the menu
   const toggleMenu = () => {
@@ -53,6 +44,15 @@ function App() {
     setMarkdown(event.target.value);
   };
 
+  // for resizing the editor
+  const resizerRef = useRef<HTMLDivElement>(null);
+  const editorWidth = useResizableEditor({
+    initialWidth: '50%',
+    minWidth: 200,
+    resizerRef: resizerRef,
+    isPreviewOpen: isPreviewOpen,
+  });
+
   // toggle show/hide preview pane
   const handleTogglePreview = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsPreviewOpen((val) => !val);
@@ -67,21 +67,21 @@ function App() {
           <ThemeToggle theme={theme} onChange={handleThemeChange} />
         </Sidebar>
 
-        <Main editorWidth={editorWidth}>
+        <Main width={editorWidth}>
           <MarkdownEditor
             markdown={markdown}
             handleMarkdownChange={handleMarkdownChange}
             isPreviewOpen={isPreviewOpen}
-            onClick={handleTogglePreview}
+            handleTogglePreview={handleTogglePreview}
           />
+          {/* For resizing the component */}
           <ResizeHandler ref={resizerRef} id='resizer' />
-          {/* {isPreviewOpen && ( */}
           <PreviewPane
-            isPreviewOpen={isPreviewOpen}
-            onClick={handleTogglePreview}
             markdown={markdown}
+            handleTogglePreview={handleTogglePreview}
+            isPreviewOpen={isPreviewOpen}
+            theme={theme}
           />
-          {/* )} */}
         </Main>
       </Wrapper>
     </ThemeProvider>
@@ -124,7 +124,7 @@ const Main = styled.main<MainProps>`
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: ${(props) => props.editorWidth} 2.5px 1fr;
+  grid-template-columns: ${(props) => props.width} 2.5px 1fr;
 `;
 
 // the thing that is clicked on and dragged in order to resize a component

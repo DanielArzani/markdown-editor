@@ -12,6 +12,7 @@ type PreviewToggleButtonProps = {
 /**
  * A toggle button for showing/hiding the PreviewPane component
  * @param handleToggle - Setter function for changing the state variable that determines whether the PreviewToggleButton is set to hide or show
+ * @param isPreviewOpen - The current state of the PreviewPane (open/closed)
  */
 
 function PreviewToggleButton({

@@ -7,25 +7,30 @@ type MarkdownEditorProps = {
   handleMarkdownChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 
   isPreviewOpen: boolean;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleTogglePreview: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /**
  * The editor body, text can be written here in markdown syntax and then the value is taken and passed into a component from the react-markdown library which will render the text as html
+ * @param markdown - The markdown that should be turned into html
+ * @param handleMarkdownChange - The input of the text area which is treated as our markdown
+ * @param handleTogglePreview - The toggle for showing/hiding the PreviewPane
+ * @param isPreviewOpen - The current state of the PreviewPane (open/closed)
  */
 const MarkdownEditor = ({
-  markdown,
   handleMarkdownChange,
-  onClick,
+  handleTogglePreview,
+  markdown,
   isPreviewOpen,
 }: MarkdownEditorProps) => {
   return (
     <Wrapper>
       <Header>
         <H2>markdown</H2>
+        {/* only show the toggle button here if the PreviewPane is closed */}
         {!isPreviewOpen && (
           <PreviewToggleButton
-            handleToggle={onClick}
+            handleToggle={handleTogglePreview}
             isPreviewOpen={isPreviewOpen}
           />
         )}

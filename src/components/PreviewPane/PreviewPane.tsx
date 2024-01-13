@@ -3,22 +3,35 @@ import Markdown from 'react-markdown';
 import styled from 'styled-components';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {
+  dark,
+  duotoneLight,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { motion } from 'framer-motion';
 
 import PreviewToggleButton from '../PreviewToggleButton';
+import { AvailableThemes } from '../../types/availableThemes';
 
 type PreviewPaneProps = {
-  isPreviewOpen: boolean;
   markdown: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isPreviewOpen: boolean;
+  handleTogglePreview: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  theme: AvailableThemes;
 };
 
 /**
  * The markdown converted into html is displayed here
  * @param markdown - The text that will be turned into html
+ * @param handleTogglePreview - The toggle for showing/hiding the PreviewPane
+ * @param isPreviewOpen - The current state of the PreviewPane (open/closed)
+ * @param theme - The current theme, used to change some styles that wouldn't be easily legible depending on the current theme (i.e. dark code blocks on dark backgrounds)
  */
-function PreviewPane({ markdown, onClick, isPreviewOpen }: PreviewPaneProps) {
+function PreviewPane({
+  markdown,
+  handleTogglePreview,
+  isPreviewOpen,
+  theme,
+}: PreviewPaneProps) {
   return (
     <Wrapper
       initial='open'
@@ -28,7 +41,7 @@ function PreviewPane({ markdown, onClick, isPreviewOpen }: PreviewPaneProps) {
       <Header>
         <H2>preview</H2>
         <PreviewToggleButton
-          handleToggle={onClick}
+          handleToggle={handleTogglePreview}
           isPreviewOpen={isPreviewOpen}
         />
       </Header>
@@ -44,7 +57,7 @@ function PreviewPane({ markdown, onClick, isPreviewOpen }: PreviewPaneProps) {
                 <SyntaxHighlighter
                   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   // @ts-ignore
-                  style={dark}
+                  style={theme === 'dark' ? dark : duotoneLight}
                   language={match[1]}
                   PreTag='div'
                   {...props}

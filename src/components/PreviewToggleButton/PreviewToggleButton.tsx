@@ -43,14 +43,16 @@ function PreviewToggleButton({
 
 export default PreviewToggleButton;
 
-const TogglePreviewButton = styled.button``;
+const TogglePreviewButton = styled.button`
+  background-color: ${(props) => props.theme.editorHeaderBg};
+`;
 
 const SVG = styled.svg`
-  fill: '#7C8187';
+  fill: ${(props) => props.theme.togglePreviewDefault};
   transition: fill 0.3s ease;
 
   &:hover {
     cursor: pointer;
-    fill: ${(props) => props.theme.togglePreview};
+    fill: ${(props) => props.theme.togglePreviewActive};
   }
 `;

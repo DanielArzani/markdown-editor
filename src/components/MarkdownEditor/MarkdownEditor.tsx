@@ -23,10 +23,12 @@ const MarkdownEditor = ({
     <Wrapper>
       <Header>
         <H2>markdown</H2>
-        <PreviewToggleButton
-          handleToggle={onClick}
-          isPreviewOpen={isPreviewOpen}
-        />
+        {!isPreviewOpen && (
+          <PreviewToggleButton
+            handleToggle={onClick}
+            isPreviewOpen={isPreviewOpen}
+          />
+        )}
       </Header>
       <EditorContainer>
         <StyledTextarea

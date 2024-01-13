@@ -75,13 +75,13 @@ function App() {
             onClick={handleTogglePreview}
           />
           <ResizeHandler ref={resizerRef} id='resizer' />
-          {isPreviewOpen && (
-            <PreviewPane
-              isPreviewOpen={isPreviewOpen}
-              onClick={handleTogglePreview}
-              markdown={markdown}
-            />
-          )}
+          {/* {isPreviewOpen && ( */}
+          <PreviewPane
+            isPreviewOpen={isPreviewOpen}
+            onClick={handleTogglePreview}
+            markdown={markdown}
+          />
+          {/* )} */}
         </Main>
       </Wrapper>
     </ThemeProvider>
@@ -97,6 +97,7 @@ const Wrapper = styled.div<WrapperProps>`
     props.isMenuOpen ? `15.625rem 1fr` : '0px 1fr'};
   transition: grid-template-columns 0.3s;
 
+  background-color: ${(props) => props.theme.editorHeaderBg};
   height: 100vh;
   max-width: 90rem;
   margin: 0 auto;

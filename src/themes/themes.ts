@@ -50,7 +50,8 @@ export const lightTheme = {
   editorBodyText: '#35393F',
   editorBodyBg: '#FFFFFF',
   editorSeparator: '#E4E4E4',
-  togglePreview: '#E46643',
+  togglePreviewDefault: '#7C8187',
+  togglePreviewActive: '#E46643',
 };
 
 export const darkTheme = {
@@ -105,6 +106,8 @@ export const darkTheme = {
   editorBodyText: '#C1C4CB',
   editorBodyBg: '#151619',
   editorSeparator: '#5A6069',
+  togglePreviewDefault: '#C1C4CB',
+  togglePreviewActive: '#E46643',
 };
 
 // For creating global styles

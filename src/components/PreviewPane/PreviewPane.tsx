@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { motion } from 'framer-motion';
+
 import PreviewToggleButton from '../PreviewToggleButton';
 
 type PreviewPaneProps = {
@@ -18,7 +20,11 @@ type PreviewPaneProps = {
  */
 function PreviewPane({ markdown, onClick, isPreviewOpen }: PreviewPaneProps) {
   return (
-    <Wrapper>
+    <Wrapper
+      initial='open'
+      animate={isPreviewOpen ? { x: '0%' } : { x: '100%' }}
+      transition={{ duration: 0.5 }}
+    >
       <Header>
         <H2>preview</H2>
         <PreviewToggleButton
@@ -62,7 +68,7 @@ function PreviewPane({ markdown, onClick, isPreviewOpen }: PreviewPaneProps) {
 
 export default PreviewPane;
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
 

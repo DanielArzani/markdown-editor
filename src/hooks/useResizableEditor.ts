@@ -1,4 +1,4 @@
-import { useEffect, useState, RefObject } from 'react';
+import { useEffect, useState, RefObject, useRef } from 'react';
 
 type UseResizableEditorProps = {
   initialWidth: string;
@@ -21,6 +21,7 @@ export const useResizableEditor = ({
   isPreviewOpen,
 }: UseResizableEditorProps) => {
   const [editorWidth, setEditorWidth] = useState<string>(initialWidth);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Function to handle the resizing action
@@ -46,11 +47,22 @@ export const useResizableEditor = ({
       window.removeEventListener('mouseup', stopResizing);
     };
 
-    // Adjust editor width based on preview pane state
+    // Adjust editor width based on preview pane state after a short delay (in order to animate it)
     if (!isPreviewOpen) {
-      setEditorWidth('100%');
+      // Clear any existing timeout to avoid multiple setEditorWidth calls
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      // Set a timeout to delay the resizing
+      timeoutRef.current = setTimeout(() => {
+        setEditorWidth('100%');
+      }, 500); // Adjust the delay here if needed
     } else if (resizerRef.current) {
       setEditorWidth(initialWidth);
+      // Clear the timeout when the preview is opened
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     }
 
     // Attach the mousedown event listener to the resizer element
@@ -61,6 +73,9 @@ export const useResizableEditor = ({
       // Clean up the event listener on unmount
       return () => {
         resizer.removeEventListener('mousedown', startResizing);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
       };
     }
   }, [minWidth, resizerRef, isPreviewOpen, initialWidth]);

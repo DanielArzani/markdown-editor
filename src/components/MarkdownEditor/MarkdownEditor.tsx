@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PreviewToggleButton from '../PreviewToggleButton';
+import { motion } from 'framer-motion';
 
 type MarkdownEditorProps = {
   markdown: string;
@@ -24,7 +25,11 @@ const MarkdownEditor = ({
   isPreviewOpen,
 }: MarkdownEditorProps) => {
   return (
-    <Wrapper>
+    <Wrapper
+    // initial='open'
+    // animate={isPreviewOpen ? { x: '0%' } : { x: '100%' }}
+    // transition={{ duration: 0.5 }}
+    >
       <Header>
         <H2>markdown</H2>
         {/* only show the toggle button here if the PreviewPane is closed */}
@@ -49,7 +54,7 @@ const MarkdownEditor = ({
 
 export default MarkdownEditor;
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
 

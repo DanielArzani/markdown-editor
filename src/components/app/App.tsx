@@ -25,6 +25,7 @@ function App() {
   const [markdown, setMarkdown] = useState('');
   const [theme, setTheme] = useState<AvailableThemes>('light');
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(true);
 
   // for resizing the editor
   const resizerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +33,7 @@ function App() {
     initialWidth: '50%',
     minWidth: 200,
     resizerRef: resizerRef,
+    isPreviewOpen: isPreviewOpen,
   });
 
   // controls the menu
@@ -51,6 +53,11 @@ function App() {
     setMarkdown(event.target.value);
   };
 
+  // toggle show/hide preview pane
+  const handleTogglePreview = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setIsPreviewOpen((val) => !val);
+  };
+
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
@@ -64,9 +71,17 @@ function App() {
           <MarkdownEditor
             markdown={markdown}
             handleMarkdownChange={handleMarkdownChange}
+            isPreviewOpen={isPreviewOpen}
+            onClick={handleTogglePreview}
           />
           <ResizeHandler ref={resizerRef} id='resizer' />
-          <PreviewPane markdown={markdown} />
+          {isPreviewOpen && (
+            <PreviewPane
+              isPreviewOpen={isPreviewOpen}
+              onClick={handleTogglePreview}
+              markdown={markdown}
+            />
+          )}
         </Main>
       </Wrapper>
     </ThemeProvider>

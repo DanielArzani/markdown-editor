@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import PreviewToggleButton from '../PreviewToggleButton';
 
 type MarkdownEditorProps = {
   markdown: string;
   handleMarkdownChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+
+  isPreviewOpen: boolean;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /**
@@ -12,11 +16,17 @@ type MarkdownEditorProps = {
 const MarkdownEditor = ({
   markdown,
   handleMarkdownChange,
+  onClick,
+  isPreviewOpen,
 }: MarkdownEditorProps) => {
   return (
     <Wrapper>
       <Header>
         <H2>markdown</H2>
+        <PreviewToggleButton
+          handleToggle={onClick}
+          isPreviewOpen={isPreviewOpen}
+        />
       </Header>
       <EditorContainer>
         <StyledTextarea
@@ -44,6 +54,7 @@ const Wrapper = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   background-color: ${(props) => props.theme.editorHeaderBg};
   height: 1rem;

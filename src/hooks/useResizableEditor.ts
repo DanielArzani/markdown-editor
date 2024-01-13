@@ -4,6 +4,7 @@ type UseResizableEditorProps = {
   initialWidth: string;
   minWidth: number;
   resizerRef: RefObject<HTMLDivElement>;
+  isPreviewOpen: boolean;
 };
 
 /**
@@ -11,11 +12,13 @@ type UseResizableEditorProps = {
  * @param initialWidth - The initial width of the editor.
  * @param minWidth - The minimum width the editor can be resized to.
  * @param resizerRef - A reference to the resizing element.
+ * @param isPreviewOpen - State variable for indicating whether the previewPane is open or not, if its not then the editor should take the full width
  */
 export const useResizableEditor = ({
   initialWidth,
   minWidth,
   resizerRef,
+  isPreviewOpen,
 }: UseResizableEditorProps) => {
   const [editorWidth, setEditorWidth] = useState<string>(initialWidth);
 
@@ -43,6 +46,13 @@ export const useResizableEditor = ({
       window.removeEventListener('mouseup', stopResizing);
     };
 
+    // Adjust editor width based on preview pane state
+    if (!isPreviewOpen) {
+      setEditorWidth('100%');
+    } else if (resizerRef.current) {
+      setEditorWidth(initialWidth);
+    }
+
     // Attach the mousedown event listener to the resizer element
     const resizer = resizerRef.current;
     if (resizer) {
@@ -53,7 +63,7 @@ export const useResizableEditor = ({
         resizer.removeEventListener('mousedown', startResizing);
       };
     }
-  }, [minWidth, resizerRef]);
+  }, [minWidth, resizerRef, isPreviewOpen, initialWidth]);
 
   return editorWidth;
 };

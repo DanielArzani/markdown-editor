@@ -50,6 +50,7 @@ export const lightTheme = {
   editorBodyText: '#35393F',
   editorBodyBg: '#FFFFFF',
   editorSeparator: '#E4E4E4',
+  togglePreview: '#E46643',
 };
 
 export const darkTheme = {

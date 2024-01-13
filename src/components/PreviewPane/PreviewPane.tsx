@@ -4,20 +4,27 @@ import styled from 'styled-components';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import PreviewToggleButton from '../PreviewToggleButton';
 
 type PreviewPaneProps = {
+  isPreviewOpen: boolean;
   markdown: string;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 /**
  * The markdown converted into html is displayed here
  * @param markdown - The text that will be turned into html
  */
-function PreviewPane({ markdown }: PreviewPaneProps) {
+function PreviewPane({ markdown, onClick, isPreviewOpen }: PreviewPaneProps) {
   return (
     <Wrapper>
       <Header>
         <H2>preview</H2>
+        <PreviewToggleButton
+          handleToggle={onClick}
+          isPreviewOpen={isPreviewOpen}
+        />
       </Header>
       <MarkdownWrapper>
         <Markdown
@@ -68,6 +75,7 @@ const Wrapper = styled.div`
 const Header = styled.header`
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   background-color: ${(props) => props.theme.editorHeaderBg};
   height: 1rem;

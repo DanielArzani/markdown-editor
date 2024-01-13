@@ -86,7 +86,7 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
 
   background-color: ${(props) => props.theme.editorBodyBg};
-  border-bottom: 10px solid ${(props) => props.theme.editorSeparator};
+  border-bottom: 2.5px solid ${(props) => props.theme.editorSeparator};
   overflow: auto;
   height: 100%;
 `;

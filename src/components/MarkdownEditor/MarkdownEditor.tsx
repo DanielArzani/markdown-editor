@@ -59,7 +59,7 @@ const Wrapper = styled(motion.div)`
   flex-direction: column;
 
   border-right: 1px solid ${(props) => props.theme.editorSeparator};
-  border-bottom: 10px solid ${(props) => props.theme.editorSeparator};
+  border-bottom: 2.5px solid ${(props) => props.theme.editorSeparator};
   height: 100%;
 `;
 

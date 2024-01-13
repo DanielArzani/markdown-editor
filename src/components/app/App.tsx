@@ -9,6 +9,7 @@ import { AvailableThemes } from '../../types/availableThemes';
 import MarkdownEditor from '../MarkdownEditor';
 import PreviewPane from '../PreviewPane';
 import { useResizableEditor } from '../../hooks/useResizableEditor';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -23,7 +24,11 @@ type MainProps = {
  */
 function App() {
   const [markdown, setMarkdown] = useState('');
-  const [theme, setTheme] = useState<AvailableThemes>('light');
+  const [theme, setTheme] = useLocalStorage<AvailableThemes>('theme', 'light', [
+    'light',
+    'dark',
+  ]);
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(true);
 

@@ -3,6 +3,7 @@ import React from 'react';
 import docLogo from '../../assets/icon-document.svg';
 import styled from 'styled-components';
 import media from '../../utils/mediaQueries';
+import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type DocumentNameProps = {
   docName: string;
@@ -15,6 +16,8 @@ type DocumentNameProps = {
  * @param setDocName - The setter function for the docName state
  */
 function DocumentName({ docName, setDocName }: DocumentNameProps) {
+  const { currentDoc } = useDocumentContext();
+
   return (
     <Wrapper>
       <ImgWrapper>
@@ -26,7 +29,7 @@ function DocumentName({ docName, setDocName }: DocumentNameProps) {
         <Input
           type='text'
           id='docName'
-          value={docName}
+          value={currentDoc?.name || docName}
           onChange={(e) => setDocName(e.target.value)}
         />
         <AnimatedBorder />

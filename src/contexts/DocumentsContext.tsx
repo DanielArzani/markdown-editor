@@ -1,10 +1,11 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode, useState } from 'react';
 import { DocumentType } from '../types/documentType';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 // shape of context data
 type DocumentContextType = {
   documents: DocumentType[];
+  currentDoc?: DocumentType;
   handleSaveDoc: (newDoc: DocumentType) => void;
   handleLoadDoc: (content: string) => void;
 };
@@ -30,6 +31,7 @@ export const DocumentProvider = ({
   onLoadDocument,
 }: DocumentProviderProps) => {
   const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', []);
+  const [currentDoc, setCurrentDocs] = useState<DocumentType>();
 
   // function to handle saving document
   const handleSaveDoc = (newDoc: DocumentType) => {
@@ -40,12 +42,13 @@ export const DocumentProvider = ({
     const docToLoad = documents.find((doc) => doc.name === chosenDocName);
     if (docToLoad) {
       onLoadDocument(docToLoad.content); // Use the callback to send content back to App
+      setCurrentDocs(docToLoad);
     }
   };
 
   return (
     <DocumentContext.Provider
-      value={{ documents, handleSaveDoc, handleLoadDoc }}
+      value={{ documents, handleSaveDoc, handleLoadDoc, currentDoc }}
     >
       {children}
     </DocumentContext.Provider>
@@ -57,6 +60,7 @@ export const DocumentProvider = ({
  * @returns documents - The list of user documents
  * @returns handleSaveDoc - Function to save a new document
  * @returns handleLoadDoc - Function for loading a document
+ * @returns currentDoc - The currently selected document
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

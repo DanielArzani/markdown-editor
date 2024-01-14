@@ -1,19 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import BaseButton from '../BaseButton';
+import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type CloseModalButtonProps = {
   closeModal: () => void;
 };
 
 /**
- * Button for closing the modal
+ * Button for closing the modal as well as deleting the current document
  * @param closeModal - function to close the modal
  * @returns
  */
 function CloseModalButton({ closeModal }: CloseModalButtonProps) {
+  const { handleDeleteDoc, currentDoc } = useDocumentContext();
+
   return (
-    <Button onClick={closeModal} width='100%' padding='1rem 4rem'>
+    <Button
+      onClick={() => {
+        if (currentDoc) {
+          handleDeleteDoc(currentDoc.id);
+        }
+        closeModal();
+      }}
+      width='100%'
+      padding='1rem 4rem'
+    >
       Confirm & Delete
     </Button>
   );

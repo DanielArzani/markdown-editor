@@ -11,6 +11,7 @@ type DocumentContextType = {
   handleCreateDoc: (newDoc: DocumentType) => void;
   handleLoadDoc: (content: string) => void;
   handleSaveDoc: (updatedName: string, updatedContent: string) => void;
+  handleDeleteDoc: (chosenDocId: string) => void;
   setCurrentDoc: React.Dispatch<React.SetStateAction<DocumentType | undefined>>;
 };
 
@@ -96,6 +97,7 @@ export const DocumentProvider = ({
     }
   };
 
+  // function to handle loading a previous document
   const handleLoadDoc = (chosenDocName: string) => {
     //FIXME: When handleSaveDoc is called, it updates the documents state, which might not be reflected immediately due to the asynchronous nature of state updates in React. This can lead to the handleLoadDoc function not having the updated documents when it tries to load the new document.
     //! Auto-save the current document before loading a new one
@@ -111,6 +113,14 @@ export const DocumentProvider = ({
     }
   };
 
+  // function to handle deleting a document
+  const handleDeleteDoc = (chosenDocId: string) => {
+    const newDocuments = documents.filter((doc) => doc.id !== chosenDocId);
+
+    setDocuments(newDocuments);
+    handleLoadDoc(documents[0].name);
+  };
+
   return (
     <DocumentContext.Provider
       value={{
@@ -120,6 +130,7 @@ export const DocumentProvider = ({
         currentDoc,
         handleSaveDoc,
         setCurrentDoc,
+        handleDeleteDoc,
       }}
     >
       {children}
@@ -133,6 +144,7 @@ export const DocumentProvider = ({
  * @returns handleCreateDoc - Function to save a new document
  * @returns handleLoadDoc - Function for loading a document
  * @returns handleSaveDoc - Function for saving/updating a document
+ * @returns handleDeleteDoc - Function for deleting a document
  * @returns currentDoc - The currently selected document
  * @returns setCurrentDoc - The setter function for the current document state variable
  */

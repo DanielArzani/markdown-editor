@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PreviewToggleButton from '../PreviewToggleButton';
 import { motion } from 'framer-motion';
+import { useDocumentContext } from '../../contexts/DocumentsContext';
+import useSaveShortcut from '../../hooks/useSaveShortCut';
 
 type MarkdownEditorProps = {
   markdown: string;
@@ -24,6 +26,19 @@ const MarkdownEditor = ({
   markdown,
   isPreviewOpen,
 }: MarkdownEditorProps) => {
+  const { currentDoc, handleSaveDoc } = useDocumentContext();
+
+  // FIXME: Currently can only save the markdown content, not any file name changes
+  // for saving when a user presses cmd + s
+  const saveDocument = () => {
+    if (currentDoc) {
+      handleSaveDoc(currentDoc.name, markdown);
+    }
+  };
+
+  // Use the custom hook for save shortcut
+  useSaveShortcut(saveDocument);
+
   return (
     <Wrapper>
       <Header>

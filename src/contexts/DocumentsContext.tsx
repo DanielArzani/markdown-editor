@@ -97,9 +97,17 @@ export const DocumentProvider = ({
   };
 
   const handleLoadDoc = (chosenDocName: string) => {
+    //FIXME: When handleSaveDoc is called, it updates the documents state, which might not be reflected immediately due to the asynchronous nature of state updates in React. This can lead to the handleLoadDoc function not having the updated documents when it tries to load the new document.
+    //! Auto-save the current document before loading a new one
+    if (currentDoc && currentDoc.name !== chosenDocName) {
+      handleSaveDoc(currentDoc.name, currentDoc.content);
+    }
+
+    // Load the chosen document
     const docToLoad = documents.find((doc) => doc.name === chosenDocName);
     if (docToLoad) {
       onLoadDocument(docToLoad.content); // Use the callback to send content back to App
+      setCurrentDoc(docToLoad);
     }
   };
 

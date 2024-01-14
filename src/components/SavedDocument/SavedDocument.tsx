@@ -17,6 +17,7 @@ type SavedDocumentProps = {
  */
 function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
   const { setCurrentDoc } = useDocumentContext();
+
   const { name, createdAt } = document;
 
   return (
@@ -27,7 +28,7 @@ function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
       <Button
         onClick={() => {
           setCurrentDoc(document); // so I always have the current document to work with
-          return handleLoadDoc(document.name);
+          handleLoadDoc(document.name);
         }}
       >
         <Time>{createdAt}</Time>

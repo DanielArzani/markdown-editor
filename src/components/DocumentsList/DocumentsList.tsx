@@ -8,12 +8,16 @@ import SavedDocument from '../SavedDocument';
  * A list of the users saved documents
  */
 function DocumentsList() {
-  const { documents } = useDocumentContext();
+  const { documents, handleLoadDoc } = useDocumentContext();
 
   return (
     <Ul>
       {documents.map((doc, index) => (
-        <SavedDocument key={index} document={doc} />
+        <SavedDocument
+          key={index}
+          document={doc}
+          handleLoadDoc={handleLoadDoc}
+        />
       ))}
     </Ul>
   );

@@ -64,16 +64,20 @@ function App() {
     setIsPreviewOpen((val) => !val);
   };
 
+  // Update markdown content
+  const handleDocumentLoad = (content: string) => {
+    setMarkdown(content);
+  };
+
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <DocumentProvider>
+      <DocumentProvider onLoadDocument={handleDocumentLoad}>
         <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
           <Header
             isMenuOpen={isMenuOpen}
             toggleMenu={toggleMenu}
             markdown={markdown}
           />
-
           <Sidebar isMenuOpen={isMenuOpen}>
             <ThemeToggle theme={theme} onChange={handleThemeChange} />
           </Sidebar>

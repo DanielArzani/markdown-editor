@@ -25,11 +25,7 @@ const MarkdownEditor = ({
   isPreviewOpen,
 }: MarkdownEditorProps) => {
   return (
-    <Wrapper
-    // initial='open'
-    // animate={isPreviewOpen ? { x: '0%' } : { x: '100%' }}
-    // transition={{ duration: 0.5 }}
-    >
+    <Wrapper>
       <Header>
         <H2>markdown</H2>
         {/* only show the toggle button here if the PreviewPane is closed */}

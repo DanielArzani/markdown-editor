@@ -11,6 +11,8 @@ type DocumentNameProps = {
 
 /**
  * Component for re-naming a document. Also displays the current document name. Has a stylistic bottom border
+ * @param docName - The document name
+ * @param setDocName - The setter function for the docName state
  */
 function DocumentName({ docName, setDocName }: DocumentNameProps) {
   return (

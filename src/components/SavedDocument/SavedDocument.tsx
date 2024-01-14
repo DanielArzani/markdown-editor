@@ -6,13 +6,15 @@ import { DocumentType } from '../../types/documentType';
 
 type SavedDocumentProps = {
   document: DocumentType;
+  handleLoadDoc: (content: string) => void;
 };
 
 /**
  * A saved document
  * @param document - A single markdown document
+ * @param handleLoadDoc - Loads the content of a document
  */
-function SavedDocument({ document }: SavedDocumentProps) {
+function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
   const { name, createdAt } = document;
 
   return (
@@ -20,7 +22,7 @@ function SavedDocument({ document }: SavedDocumentProps) {
       <div>
         <img src={DocumentIcon} alt='Document Icon' />
       </div>
-      <Button>
+      <Button onClick={() => handleLoadDoc(document.name)}>
         <Time>{createdAt}</Time>
         <Span>{name}</Span>
       </Button>

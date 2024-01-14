@@ -6,6 +6,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 type DocumentContextType = {
   documents: DocumentType[];
   handleSaveDoc: (newDoc: DocumentType) => void;
+  handleLoadDoc: (content: string) => void;
 };
 
 // Create the context with an initial empty state
@@ -16,12 +17,18 @@ const DocumentContext = createContext<DocumentContextType | undefined>(
 // Define the provider component
 type DocumentProviderProps = {
   children: ReactNode;
+  onLoadDocument: (content: string) => void;
 };
 
 /**
  * All data/functions involving documents (i.e. the users markdown files)
+ * @param children - The components that should receive the context data
+ * @param onLoadDocument
  */
-export const DocumentProvider = ({ children }: DocumentProviderProps) => {
+export const DocumentProvider = ({
+  children,
+  onLoadDocument,
+}: DocumentProviderProps) => {
   const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', []);
 
   // function to handle saving document
@@ -29,8 +36,17 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
     setDocuments((prevDocs) => [...prevDocs, newDoc]);
   };
 
+  const handleLoadDoc = (chosenDocName: string) => {
+    const docToLoad = documents.find((doc) => doc.name === chosenDocName);
+    if (docToLoad) {
+      onLoadDocument(docToLoad.content); // Use the callback to send content back to App
+    }
+  };
+
   return (
-    <DocumentContext.Provider value={{ documents, handleSaveDoc }}>
+    <DocumentContext.Provider
+      value={{ documents, handleSaveDoc, handleLoadDoc }}
+    >
       {children}
     </DocumentContext.Provider>
   );
@@ -40,6 +56,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
 /**
  * @returns documents - The list of user documents
  * @returns handleSaveDoc - Function to save a new document
+ * @returns handleLoadDoc - Function for loading a document
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

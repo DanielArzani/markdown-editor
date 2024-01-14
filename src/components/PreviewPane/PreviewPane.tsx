@@ -10,13 +10,13 @@ import {
 import { motion } from 'framer-motion';
 
 import PreviewToggleButton from '../PreviewToggleButton';
-import { AvailableThemes } from '../../types/availableThemes';
+import { AvailableThemesType } from '../../types/availableThemesType';
 
 type PreviewPaneProps = {
   markdown: string;
   isPreviewOpen: boolean;
   handleTogglePreview: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  theme: AvailableThemes;
+  theme: AvailableThemesType;
 };
 
 /**

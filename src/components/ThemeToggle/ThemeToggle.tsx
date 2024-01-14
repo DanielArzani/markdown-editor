@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { AvailableThemes } from '../../types/availableThemes';
+import { AvailableThemesType } from '../../types/availableThemesType';
 import styled from 'styled-components';
 
 type SvgProps = {
-  currentTheme: AvailableThemes;
+  currentTheme: AvailableThemesType;
 };
 
 type ThemeToggleProps = {
-  onChange: (value: AvailableThemes) => void;
-  theme: AvailableThemes;
+  onChange: (value: AvailableThemesType) => void;
+  theme: AvailableThemesType;
 };
 
 /**
@@ -27,7 +27,7 @@ function ThemeToggle({ theme, onChange }: ThemeToggleProps) {
           id='light'
           checked={theme === 'light'}
           value='light'
-          onChange={(e) => onChange(e.target.value as AvailableThemes)}
+          onChange={(e) => onChange(e.target.value as AvailableThemesType)}
         />
         <label htmlFor='light' className='radio-switch__label'>
           <span className='sr-only'>light mode</span>
@@ -46,7 +46,7 @@ function ThemeToggle({ theme, onChange }: ThemeToggleProps) {
           id='dark'
           value='dark'
           checked={theme === 'dark'}
-          onChange={(e) => onChange(e.target.value as AvailableThemes)}
+          onChange={(e) => onChange(e.target.value as AvailableThemesType)}
         />
         <label htmlFor='dark' className='radio-switch__label'>
           <span className='sr-only'>dark mode</span>

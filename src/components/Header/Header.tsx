@@ -23,6 +23,15 @@ type HeaderProps = {
 function Header({ isMenuOpen, markdown, toggleMenu }: HeaderProps) {
   const [docName, setDocName] = useState<string>('Welcome.md');
 
+  // ensure that the document name always has a .md extension
+  // const ensureMdExtension = (name: string) => {
+  //   return name.endsWith('.md') ? name : `${name}.md`;
+  // };
+
+  // const handleDocName = () => {
+
+  // }
+
   return (
     <>
       <StyledHeader>

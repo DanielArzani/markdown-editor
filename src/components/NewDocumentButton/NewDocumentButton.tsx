@@ -1,10 +1,31 @@
 import React from 'react';
-import BaseButton from '../BaseButton';
 import styled from 'styled-components';
 
+import BaseButton from '../BaseButton';
+import { useDocumentContext } from '../../contexts/DocumentsContext';
+import createUniqueId from '../../utils/createUniqueId';
+import formatDate from '../../utils/formatDate';
+import { DocumentType } from '../../types/documentType';
+
+/**
+ * Button for creating a new markdown document
+ */
 function NewDocumentButton() {
+  const { handleCreateDoc } = useDocumentContext();
+
+  const currentDoc: DocumentType = {
+    id: createUniqueId(),
+    name: 'Welcome.md',
+    createdAt: formatDate(Date.now()),
+    content: '',
+  };
+
   return (
-    <Button padding={'.75rem 2rem'} width='100%'>
+    <Button
+      onClick={() => handleCreateDoc(currentDoc)}
+      padding={'.75rem 2rem'}
+      width='100%'
+    >
       + New Document
     </Button>
   );

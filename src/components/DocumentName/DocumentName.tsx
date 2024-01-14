@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import docLogo from '../../assets/icon-document.svg';
 import styled from 'styled-components';
@@ -18,6 +18,13 @@ type DocumentNameProps = {
 function DocumentName({ docName, setDocName }: DocumentNameProps) {
   const { currentDoc } = useDocumentContext();
 
+  // Update docName when currentDoc changes
+  useEffect(() => {
+    if (currentDoc) {
+      setDocName(currentDoc.name);
+    }
+  }, [currentDoc, setDocName]);
+
   return (
     <Wrapper>
       <ImgWrapper>
@@ -29,7 +36,7 @@ function DocumentName({ docName, setDocName }: DocumentNameProps) {
         <Input
           type='text'
           id='docName'
-          value={currentDoc?.name || docName}
+          value={docName}
           onChange={(e) => setDocName(e.target.value)}
         />
         <AnimatedBorder />

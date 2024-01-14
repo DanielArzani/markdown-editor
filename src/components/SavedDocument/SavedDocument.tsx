@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import DocumentIcon from '../../assets/icon-document.svg';
 import { DocumentType } from '../../types/documentType';
+import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type SavedDocumentProps = {
   document: DocumentType;
@@ -15,6 +16,7 @@ type SavedDocumentProps = {
  * @param handleLoadDoc - Loads the content of a document
  */
 function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
+  const { setCurrentDoc } = useDocumentContext();
   const { name, createdAt } = document;
 
   return (
@@ -22,7 +24,12 @@ function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
       <div>
         <img src={DocumentIcon} alt='Document Icon' />
       </div>
-      <Button onClick={() => handleLoadDoc(document.name)}>
+      <Button
+        onClick={() => {
+          setCurrentDoc(document); // so I always have the current document to work with
+          return handleLoadDoc(document.name);
+        }}
+      >
         <Time>{createdAt}</Time>
         <Span>{name}</Span>
       </Button>

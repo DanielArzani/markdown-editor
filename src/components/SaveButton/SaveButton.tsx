@@ -6,9 +6,6 @@ import styled from 'styled-components';
 import media from '../../utils/mediaQueries';
 import BaseButton from '../BaseButton';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
-import { DocumentType } from '../../types/documentType';
-import formatDate from '../../utils/formatDate';
-import createUniqueId from '../../utils/createUniqueId';
 
 type SaveButtonProps = {
   markdown: string;
@@ -23,15 +20,8 @@ type SaveButtonProps = {
 function SaveButton({ markdown, name }: SaveButtonProps) {
   const { handleSaveDoc } = useDocumentContext();
 
-  const currentDoc: DocumentType = {
-    id: createUniqueId(),
-    name: name,
-    createdAt: formatDate(Date.now()),
-    content: markdown,
-  };
-
   return (
-    <Button padding='.8rem' onClick={() => handleSaveDoc(currentDoc)}>
+    <Button padding='.8rem' onClick={() => handleSaveDoc(name, markdown)}>
       <img src={saveIcon} alt='Save Icon' />
       <Span>Save Changes</Span>
     </Button>

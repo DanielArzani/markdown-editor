@@ -68,7 +68,11 @@ function App() {
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <DocumentProvider>
         <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
-          <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+          <Header
+            isMenuOpen={isMenuOpen}
+            toggleMenu={toggleMenu}
+            markdown={markdown}
+          />
 
           <Sidebar isMenuOpen={isMenuOpen}>
             <ThemeToggle theme={theme} onChange={handleThemeChange} />

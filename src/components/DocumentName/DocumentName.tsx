@@ -4,10 +4,15 @@ import docLogo from '../../assets/icon-document.svg';
 import styled from 'styled-components';
 import media from '../../utils/mediaQueries';
 
+type DocumentNameProps = {
+  docName: string;
+  setDocName: React.Dispatch<React.SetStateAction<string>>;
+};
+
 /**
  * Component for re-naming a document. Also displays the current document name. Has a stylistic bottom border
  */
-function DocumentName() {
+function DocumentName({ docName, setDocName }: DocumentNameProps) {
   return (
     <Wrapper>
       <ImgWrapper>
@@ -16,7 +21,12 @@ function DocumentName() {
 
       <InputWrapper>
         <Label htmlFor='docName'>Document Name</Label>
-        <Input type='text' id='docName' defaultValue='Welcome.md' />
+        <Input
+          type='text'
+          id='docName'
+          value={docName}
+          onChange={(e) => setDocName(e.target.value)}
+        />
         <AnimatedBorder />
       </InputWrapper>
     </Wrapper>

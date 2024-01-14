@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Logo from '../Logo';
@@ -10,13 +10,19 @@ import DocumentName from '../DocumentName';
 
 type HeaderProps = {
   isMenuOpen: boolean;
+  markdown: string;
   toggleMenu: () => void;
 };
 
 /**
  * The project header. Contains the components for deleting, re-naming and saving documents as well as the menu
+ * @param isMenuOpen - Indicates whether the menu is currently open or not
+ * @param markdown - The users input, to be passed down to the save button
+ * @param toggleMenu - Function for opening/closing the menu
  */
-function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
+function Header({ isMenuOpen, markdown, toggleMenu }: HeaderProps) {
+  const [docName, setDocName] = useState<string>('Welcome.md');
+
   return (
     <>
       <StyledHeader>
@@ -32,19 +38,19 @@ function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
             <Line />
           </LogoWrapper>
 
-          <DocumentName />
+          <DocumentName docName={docName} setDocName={setDocName} />
         </MinorWrapper>
 
         <MinorWrapper>
           <DeleteIcon />
-          <SaveButton />
+          <SaveButton markdown={markdown} name={docName} />
         </MinorWrapper>
       </StyledHeader>
     </>
   );
 }
 
-export default Header;
+export default React.memo(Header);
 
 const StyledHeader = styled.header`
   display: flex;

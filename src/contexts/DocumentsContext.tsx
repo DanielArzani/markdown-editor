@@ -1,5 +1,6 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { DocumentType } from '../types/documentType';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 // shape of context data
 type DocumentContextType = {
@@ -21,12 +22,11 @@ type DocumentProviderProps = {
  * All data/functions involving documents (i.e. the users markdown files)
  */
 export const DocumentProvider = ({ children }: DocumentProviderProps) => {
-  const [documents, setDocuments] = useState<DocumentType[]>([]);
+  const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', []);
 
   // function to handle saving document
   const handleSaveDoc = (newDoc: DocumentType) => {
-    console.log('Document Saved');
-    // setDocuments((prevDocs) => [...prevDocs, newDoc]);
+    setDocuments((prevDocs) => [...prevDocs, newDoc]);
   };
 
   return (

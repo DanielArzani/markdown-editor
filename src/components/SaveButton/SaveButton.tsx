@@ -7,21 +7,29 @@ import media from '../../utils/mediaQueries';
 import BaseButton from '../BaseButton';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 import { DocumentType } from '../../types/documentType';
+import formatDate from '../../utils/formatDate';
+
+type SaveButtonProps = {
+  markdown: string;
+  name: string;
+};
 
 /**
  * Button for saving markdown documents
+ * @param markdown - The users input that they wish to be saved
+ * @param name - The name of the document
  */
-function SaveButton() {
+function SaveButton({ markdown, name }: SaveButtonProps) {
   const { handleSaveDoc } = useDocumentContext();
 
-  const tempDoc: DocumentType = {
-    name: '',
-    createdAt: '',
-    content: '',
+  const currentDoc: DocumentType = {
+    name: name,
+    createdAt: formatDate(Date.now()),
+    content: markdown,
   };
 
   return (
-    <Button padding='.8rem' onClick={() => handleSaveDoc(tempDoc)}>
+    <Button padding='.8rem' onClick={() => handleSaveDoc(currentDoc)}>
       <img src={saveIcon} alt='Save Icon' />
       <Span>Save Changes</Span>
     </Button>

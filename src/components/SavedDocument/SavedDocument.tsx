@@ -2,19 +2,27 @@ import React from 'react';
 import styled from 'styled-components';
 
 import DocumentIcon from '../../assets/icon-document.svg';
+import { DocumentType } from '../../types/documentType';
+
+type SavedDocumentProps = {
+  document: DocumentType;
+};
 
 /**
  * A saved document
+ * @param document - A single markdown document
  */
-function SavedDocument() {
+function SavedDocument({ document }: SavedDocumentProps) {
+  const { name, createdAt } = document;
+
   return (
     <Li>
       <div>
         <img src={DocumentIcon} alt='Document Icon' />
       </div>
       <Button>
-        <Time>01 April 2022</Time>
-        <Span>untitled-document.md</Span>
+        <Time>{createdAt}</Time>
+        <Span>{name}</Span>
       </Button>
     </Li>
   );

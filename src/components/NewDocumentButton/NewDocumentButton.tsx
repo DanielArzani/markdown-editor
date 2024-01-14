@@ -15,7 +15,7 @@ function NewDocumentButton() {
 
   const currentDoc: DocumentType = {
     id: createUniqueId(),
-    name: 'Welcome.md',
+    name: `Doc-${createUniqueId().slice(1, 5)}`,
     createdAt: formatDate(Date.now()),
     content: '',
   };

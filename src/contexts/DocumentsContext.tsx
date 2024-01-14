@@ -4,14 +4,6 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import createUniqueId from '../utils/createUniqueId';
 import formatDate from '../utils/formatDate';
 
-// This is the initial document that a new user will see when they first use the app
-const BASE_DOCUMENT: DocumentType = {
-  id: createUniqueId(),
-  name: 'Welcome.md',
-  createdAt: formatDate(Date.now()),
-  content: '',
-};
-
 // shape of context data
 type DocumentContextType = {
   documents: DocumentType[];
@@ -42,9 +34,7 @@ export const DocumentProvider = ({
   children,
   onLoadDocument,
 }: DocumentProviderProps) => {
-  const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', [
-    BASE_DOCUMENT,
-  ]);
+  const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', []);
   const [currentDoc, setCurrentDoc] = useState<DocumentType>();
 
   // function to handle creating a new document
@@ -54,6 +44,23 @@ export const DocumentProvider = ({
 
   // function to update/save a document
   const handleSaveDoc = (updatedName: string, updatedContent: string) => {
+    const updatedNameWithExtension = updatedName.endsWith('.md')
+      ? updatedName
+      : updatedName + '.md';
+
+    // Check if a document with the same name already exists (excluding the current document)
+    const isNameTaken = documents.some(
+      (doc) =>
+        doc.name === updatedNameWithExtension && doc.id !== currentDoc?.id
+    );
+
+    if (isNameTaken) {
+      alert(
+        'A document with this name already exists. Please use a different name.'
+      );
+      return;
+    }
+
     const docIndex = documents.findIndex((doc) => doc.id === currentDoc?.id);
 
     if (docIndex !== -1) {

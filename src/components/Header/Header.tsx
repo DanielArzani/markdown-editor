@@ -7,6 +7,7 @@ import Menu from '../MenuIcon/Menu';
 import SaveButton from '../SaveButton';
 import DeleteIcon from '../DeleteIcon';
 import DocumentName from '../DocumentName';
+import createUniqueId from '../../utils/createUniqueId';
 
 type HeaderProps = {
   isMenuOpen: boolean;
@@ -21,16 +22,9 @@ type HeaderProps = {
  * @param toggleMenu - Function for opening/closing the menu
  */
 function Header({ isMenuOpen, markdown, toggleMenu }: HeaderProps) {
-  const [docName, setDocName] = useState<string>('Welcome.md');
-
-  // ensure that the document name always has a .md extension
-  // const ensureMdExtension = (name: string) => {
-  //   return name.endsWith('.md') ? name : `${name}.md`;
-  // };
-
-  // const handleDocName = () => {
-
-  // }
+  const [docName, setDocName] = useState<string>(
+    `Doc-${createUniqueId().slice(1, 5)}`
+  );
 
   return (
     <>

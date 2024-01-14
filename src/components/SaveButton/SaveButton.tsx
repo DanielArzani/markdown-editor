@@ -21,7 +21,12 @@ function SaveButton({ markdown, name }: SaveButtonProps) {
   const { handleSaveDoc } = useDocumentContext();
 
   return (
-    <Button padding='.8rem' onClick={() => handleSaveDoc(name, markdown)}>
+    <Button
+      padding='.8rem'
+      onClick={() =>
+        handleSaveDoc(name.endsWith('.md') ? name : name + '.md', markdown)
+      }
+    >
       <img src={saveIcon} alt='Save Icon' />
       <Span>Save Changes</Span>
     </Button>

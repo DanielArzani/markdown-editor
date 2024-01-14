@@ -37,11 +37,15 @@ const MarkdownEditor = ({
         )}
       </Header>
       <EditorContainer>
+        <label htmlFor='markdown-editor' className='sr-only'>
+          Markdown Editor
+        </label>
         <StyledTextarea
           value={markdown}
           onChange={handleMarkdownChange}
           placeholder='Write your markdown here...'
           aria-label='Markdown editor'
+          id='markdown-editor'
         />
       </EditorContainer>
     </Wrapper>

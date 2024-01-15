@@ -135,6 +135,9 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
 
     setDocuments(newDocuments);
     handleLoadDoc(documents[0].name);
+    setCurrentDoc(documents[0]);
+    setMarkdown('');
+    setDocName('Welcome.md');
   };
 
   return (

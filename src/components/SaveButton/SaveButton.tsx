@@ -7,24 +7,21 @@ import media from '../../utils/mediaQueries';
 import BaseButton from '../BaseButton';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 
-type SaveButtonProps = {
-  markdown: string;
-  name: string;
-};
-
 /**
  * Button for saving markdown documents
- * @param markdown - The users input that they wish to be saved
  * @param name - The name of the document
  */
-function SaveButton({ markdown, name }: SaveButtonProps) {
-  const { handleSaveDoc } = useDocumentContext();
+function SaveButton() {
+  const { markdown, handleSaveDoc, docName } = useDocumentContext();
 
   return (
     <Button
       padding='.8rem'
       onClick={() =>
-        handleSaveDoc(name.endsWith('.md') ? name : name + '.md', markdown)
+        handleSaveDoc(
+          docName.endsWith('.md') ? docName : docName + '.md',
+          markdown
+        )
       }
     >
       <img src={saveIcon} alt='Save Icon' />

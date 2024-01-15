@@ -5,25 +5,13 @@ import styled from 'styled-components';
 import media from '../../utils/mediaQueries';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 
-type DocumentNameProps = {
-  docName: string;
-  setDocName: React.Dispatch<React.SetStateAction<string>>;
-};
-
 /**
  * Component for re-naming a document. Also displays the current document name. Has a stylistic bottom border
  * @param docName - The document name
  * @param setDocName - The setter function for the docName state
  */
-function DocumentName({ docName, setDocName }: DocumentNameProps) {
-  const { currentDoc } = useDocumentContext();
-
-  // Update docName when currentDoc changes
-  useEffect(() => {
-    if (currentDoc) {
-      setDocName(currentDoc.name);
-    }
-  }, [currentDoc, setDocName]);
+function DocumentName() {
+  const { docName, handleDocNameChange } = useDocumentContext();
 
   return (
     <Wrapper>
@@ -37,7 +25,7 @@ function DocumentName({ docName, setDocName }: DocumentNameProps) {
           type='text'
           id='docName'
           value={docName}
-          onChange={(e) => setDocName(e.target.value)}
+          onChange={(e) => handleDocNameChange(e.target.value)}
         />
         <AnimatedBorder />
       </InputWrapper>

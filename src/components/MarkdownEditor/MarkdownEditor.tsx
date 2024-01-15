@@ -3,12 +3,9 @@ import styled from 'styled-components';
 import PreviewToggleButton from '../PreviewToggleButton';
 import { motion } from 'framer-motion';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
-import useSaveShortcut from '../../hooks/useSaveShortCut';
+import useSaveShortcut from '../../hooks/useSaveShortcut';
 
 type MarkdownEditorProps = {
-  markdown: string;
-  handleMarkdownChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-
   isPreviewOpen: boolean;
   handleTogglePreview: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
@@ -21,12 +18,11 @@ type MarkdownEditorProps = {
  * @param isPreviewOpen - The current state of the PreviewPane (open/closed)
  */
 const MarkdownEditor = ({
-  handleMarkdownChange,
   handleTogglePreview,
-  markdown,
   isPreviewOpen,
 }: MarkdownEditorProps) => {
-  const { currentDoc, handleSaveDoc } = useDocumentContext();
+  const { currentDoc, markdown, handleSaveDoc, handleMarkdownChange } =
+    useDocumentContext();
 
   // FIXME: Currently can only save the markdown content, not any file name changes
   // for saving when a user presses cmd + s

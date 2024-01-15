@@ -7,7 +7,6 @@ import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type SavedDocumentProps = {
   document: DocumentType;
-  handleLoadDoc: (content: string) => void;
 };
 
 /**
@@ -15,10 +14,10 @@ type SavedDocumentProps = {
  * @param document - A single markdown document
  * @param handleLoadDoc - Loads the content of a document
  */
-function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
-  const { setCurrentDoc } = useDocumentContext();
+function SavedDocument({ document }: SavedDocumentProps) {
+  const { handleLoadDoc } = useDocumentContext();
 
-  const { name, createdAt } = document;
+  const { id, name, createdAt } = document;
 
   return (
     <Li>
@@ -27,8 +26,7 @@ function SavedDocument({ document, handleLoadDoc }: SavedDocumentProps) {
       </div>
       <Button
         onClick={() => {
-          setCurrentDoc(document); // so I always have the current document to work with
-          handleLoadDoc(document.name);
+          handleLoadDoc(id);
         }}
       >
         <Time>{createdAt}</Time>

@@ -11,21 +11,15 @@ import createUniqueId from '../../utils/createUniqueId';
 
 type HeaderProps = {
   isMenuOpen: boolean;
-  markdown: string;
   toggleMenu: () => void;
 };
 
 /**
  * The project header. Contains the components for deleting, re-naming and saving documents as well as the menu
  * @param isMenuOpen - Indicates whether the menu is currently open or not
- * @param markdown - The users input, to be passed down to the save button
  * @param toggleMenu - Function for opening/closing the menu
  */
-function Header({ isMenuOpen, markdown, toggleMenu }: HeaderProps) {
-  const [docName, setDocName] = useState<string>(
-    `Doc-${createUniqueId().slice(1, 5)}`
-  );
-
+function Header({ isMenuOpen, toggleMenu }: HeaderProps) {
   return (
     <>
       <StyledHeader>
@@ -41,12 +35,12 @@ function Header({ isMenuOpen, markdown, toggleMenu }: HeaderProps) {
             <Line />
           </LogoWrapper>
 
-          <DocumentName docName={docName} setDocName={setDocName} />
+          <DocumentName />
         </MinorWrapper>
 
         <MinorWrapper>
           <DeleteIcon />
-          <SaveButton markdown={markdown} name={docName} />
+          <SaveButton />
         </MinorWrapper>
       </StyledHeader>
     </>

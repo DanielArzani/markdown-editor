@@ -11,9 +11,9 @@ import { motion } from 'framer-motion';
 
 import PreviewToggleButton from '../PreviewToggleButton';
 import { AvailableThemesType } from '../../types/availableThemesType';
+import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type PreviewPaneProps = {
-  markdown: string;
   isPreviewOpen: boolean;
   handleTogglePreview: (event: React.MouseEvent<HTMLButtonElement>) => void;
   theme: AvailableThemesType;
@@ -27,11 +27,12 @@ type PreviewPaneProps = {
  * @param theme - The current theme, used to change some styles that wouldn't be easily legible depending on the current theme (i.e. dark code blocks on dark backgrounds)
  */
 function PreviewPane({
-  markdown,
   handleTogglePreview,
   isPreviewOpen,
   theme,
 }: PreviewPaneProps) {
+  const { markdown } = useDocumentContext();
+
   return (
     <Wrapper
       initial='open'

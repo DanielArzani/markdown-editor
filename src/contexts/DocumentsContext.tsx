@@ -8,11 +8,15 @@ import formatDate from '../utils/formatDate';
 type DocumentContextType = {
   documents: DocumentType[];
   currentDoc?: DocumentType;
+  markdown: string;
+  docName: string;
   handleCreateDoc: (newDoc: DocumentType) => void;
   handleLoadDoc: (content: string) => void;
   handleSaveDoc: (updatedName: string, updatedContent: string) => void;
   handleDeleteDoc: (chosenDocId: string) => void;
   setCurrentDoc: React.Dispatch<React.SetStateAction<DocumentType | undefined>>;
+  handleMarkdownChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleDocNameChange: (newName: string) => void;
 };
 
 // Create the context with an initial empty state
@@ -23,20 +27,31 @@ const DocumentContext = createContext<DocumentContextType | undefined>(
 // Define the provider component
 type DocumentProviderProps = {
   children: ReactNode;
-  onLoadDocument: (content: string) => void;
+  // onLoadDocument: (content: string) => void;
 };
 
 /**
  * All data/functions involving documents (i.e. the users markdown files)
  * @param children - The components that should receive the context data
- * @param onLoadDocument
  */
-export const DocumentProvider = ({
-  children,
-  onLoadDocument,
-}: DocumentProviderProps) => {
+export const DocumentProvider = ({ children }: DocumentProviderProps) => {
   const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', []);
   const [currentDoc, setCurrentDoc] = useState<DocumentType>();
+  const [markdown, setMarkdown] = useState('');
+  const [docName, setDocName] = useState<string>(
+    `Doc-${createUniqueId().slice(1, 5)}`
+  );
+
+  // controls the text field input for writing the markdown
+  const handleMarkdownChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setMarkdown(event.target.value);
+  };
+
+  const handleDocNameChange = (newName: string) => {
+    setDocName(newName);
+  };
 
   // function to handle creating a new document
   const handleCreateDoc = (newDoc: DocumentType) => {
@@ -98,18 +113,19 @@ export const DocumentProvider = ({
   };
 
   // function to handle loading a previous document
-  const handleLoadDoc = (chosenDocName: string) => {
+  const handleLoadDoc = (chosenDocId: string) => {
     //FIXME: When handleSaveDoc is called, it updates the documents state, which might not be reflected immediately due to the asynchronous nature of state updates in React. This can lead to the handleLoadDoc function not having the updated documents when it tries to load the new document.
     //! Auto-save the current document before loading a new one
-    if (currentDoc && currentDoc.name !== chosenDocName) {
-      handleSaveDoc(currentDoc.name, currentDoc.content);
-    }
+    // if (currentDoc && currentDoc.name !== chosenDocId) {
+    //   handleSaveDoc(currentDoc.name, currentDoc.content);
+    // }
 
     // Load the chosen document
-    const docToLoad = documents.find((doc) => doc.name === chosenDocName);
+    const docToLoad = documents.find((doc) => doc.id === chosenDocId);
     if (docToLoad) {
-      onLoadDocument(docToLoad.content); // Use the callback to send content back to App
-      setCurrentDoc(docToLoad);
+      setCurrentDoc(docToLoad); // so I always have the current document to work with
+      setMarkdown(docToLoad.content);
+      setDocName(docToLoad.name);
     }
   };
 
@@ -125,12 +141,16 @@ export const DocumentProvider = ({
     <DocumentContext.Provider
       value={{
         documents,
+        currentDoc,
+        markdown,
+        docName,
         handleCreateDoc,
         handleLoadDoc,
-        currentDoc,
         handleSaveDoc,
         setCurrentDoc,
         handleDeleteDoc,
+        handleMarkdownChange,
+        handleDocNameChange,
       }}
     >
       {children}
@@ -147,6 +167,10 @@ export const DocumentProvider = ({
  * @returns handleDeleteDoc - Function for deleting a document
  * @returns currentDoc - The currently selected document
  * @returns setCurrentDoc - The setter function for the current document state variable
+ * @returns markdown -
+ * @returns handleMarkdownChange -
+ * @returns docName
+ * @returns handleDocNameChange
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

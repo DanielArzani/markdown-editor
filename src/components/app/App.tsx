@@ -10,7 +10,6 @@ import MarkdownEditor from '../MarkdownEditor';
 import PreviewPane from '../PreviewPane';
 import { useResizableEditor } from '../../hooks/useResizableEditor';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { DocumentProvider } from '../../contexts/DocumentsContext';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -24,7 +23,6 @@ type MainProps = {
  * Markdown Editor App
  */
 function App() {
-  const [markdown, setMarkdown] = useState('');
   const [theme, setTheme] = useLocalStorage<AvailableThemesType>(
     'theme',
     'light',
@@ -43,13 +41,6 @@ function App() {
     setTheme(newTheme);
   };
 
-  // controls the text field input for writing the markdown
-  const handleMarkdownChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setMarkdown(event.target.value);
-  };
-
   // for resizing the editor
   const resizerRef = useRef<HTMLDivElement>(null);
   const editorWidth = useResizableEditor({
@@ -65,41 +56,32 @@ function App() {
   };
 
   // Update markdown content
-  const handleDocumentLoad = (content: string) => {
-    setMarkdown(content);
-  };
+  // const handleDocumentLoad = (content: string) => {
+  //   setMarkdown(content);
+  // };
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <DocumentProvider onLoadDocument={handleDocumentLoad}>
-        <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
-          <Header
-            isMenuOpen={isMenuOpen}
-            toggleMenu={toggleMenu}
-            markdown={markdown}
-          />
-          <Sidebar isMenuOpen={isMenuOpen}>
-            <ThemeToggle theme={theme} onChange={handleThemeChange} />
-          </Sidebar>
+      <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
+        <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+        <Sidebar isMenuOpen={isMenuOpen}>
+          <ThemeToggle theme={theme} onChange={handleThemeChange} />
+        </Sidebar>
 
-          <Main width={editorWidth}>
-            <MarkdownEditor
-              markdown={markdown}
-              handleMarkdownChange={handleMarkdownChange}
-              isPreviewOpen={isPreviewOpen}
-              handleTogglePreview={handleTogglePreview}
-            />
-            {/* For resizing the component */}
-            <ResizeHandler ref={resizerRef} id='resizer' />
-            <PreviewPane
-              markdown={markdown}
-              handleTogglePreview={handleTogglePreview}
-              isPreviewOpen={isPreviewOpen}
-              theme={theme}
-            />
-          </Main>
-        </Wrapper>
-      </DocumentProvider>
+        <Main width={editorWidth}>
+          <MarkdownEditor
+            isPreviewOpen={isPreviewOpen}
+            handleTogglePreview={handleTogglePreview}
+          />
+          {/* For resizing the component */}
+          <ResizeHandler ref={resizerRef} id='resizer' />
+          <PreviewPane
+            handleTogglePreview={handleTogglePreview}
+            isPreviewOpen={isPreviewOpen}
+            theme={theme}
+          />
+        </Main>
+      </Wrapper>
     </ThemeProvider>
   );
 }

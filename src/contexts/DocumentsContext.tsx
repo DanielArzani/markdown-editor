@@ -160,17 +160,17 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
 
 // Hook for easy use of the context in components
 /**
+ * @returns currentDoc - The currently selected document
  * @returns documents - The list of user documents
+ * @returns docName - The current documents name
+ * @returns markdown - The markdown content
  * @returns handleCreateDoc - Function to save a new document
+ * @returns handleDeleteDoc - Function for deleting a document
  * @returns handleLoadDoc - Function for loading a document
  * @returns handleSaveDoc - Function for saving/updating a document
- * @returns handleDeleteDoc - Function for deleting a document
- * @returns currentDoc - The currently selected document
+ * @returns handleMarkdownChange - For setting the new markdown state
+ * @returns handleDocNameChange - For setting the new document name state
  * @returns setCurrentDoc - The setter function for the current document state variable
- * @returns markdown -
- * @returns handleMarkdownChange -
- * @returns docName
- * @returns handleDocNameChange
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

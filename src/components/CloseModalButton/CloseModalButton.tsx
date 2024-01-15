@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled from 'styled-components';
 
 import BaseButton from '../BaseButton';
@@ -11,7 +12,6 @@ type CloseModalButtonProps = {
 /**
  * Button for closing the modal as well as deleting the current document
  * @param closeModal - function to close the modal
- * @returns
  */
 function CloseModalButton({ closeModal }: CloseModalButtonProps) {
   const { handleDeleteDoc, currentDoc } = useDocumentContext();

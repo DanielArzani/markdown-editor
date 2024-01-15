@@ -1,16 +1,17 @@
 import React from 'react';
-import Markdown from 'react-markdown';
-import styled from 'styled-components';
-import remarkGfm from 'remark-gfm';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
 import {
   dark,
   duotoneLight,
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import Markdown from 'react-markdown';
 import { motion } from 'framer-motion';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import remarkGfm from 'remark-gfm';
+import styled from 'styled-components';
 
-import PreviewToggleButton from '../PreviewToggleButton';
 import { AvailableThemesType } from '../../types/availableThemesType';
+import PreviewToggleButton from '../PreviewToggleButton';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type PreviewPaneProps = {
@@ -21,7 +22,6 @@ type PreviewPaneProps = {
 
 /**
  * The markdown converted into html is displayed here
- * @param markdown - The text that will be turned into html
  * @param handleTogglePreview - The toggle for showing/hiding the PreviewPane
  * @param isPreviewOpen - The current state of the PreviewPane (open/closed)
  * @param theme - The current theme, used to change some styles that wouldn't be easily legible depending on the current theme (i.e. dark code blocks on dark backgrounds)

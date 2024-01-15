@@ -9,7 +9,6 @@ import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 /**
  * Button for saving markdown documents
- * @param name - The name of the document
  */
 function SaveButton() {
   const { markdown, handleSaveDoc, docName } = useDocumentContext();

@@ -1,8 +1,9 @@
-import React, { createContext, useContext, ReactNode, useState } from 'react';
-import { DocumentType } from '../types/documentType';
-import useLocalStorage from '../hooks/useLocalStorage';
+import React, { createContext, ReactNode, useContext, useState } from 'react';
+
 import createUniqueId from '../utils/createUniqueId';
+import { DocumentType } from '../types/documentType';
 import formatDate from '../utils/formatDate';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 // shape of context data
 type DocumentContextType = {
@@ -27,7 +28,6 @@ const DocumentContext = createContext<DocumentContextType | undefined>(
 // Define the provider component
 type DocumentProviderProps = {
   children: ReactNode;
-  // onLoadDocument: (content: string) => void;
 };
 
 /**

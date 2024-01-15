@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Modal from 'react-modal';
 import styled from 'styled-components';
+
 import CloseModalButton from '../CloseModalButton';
 
 // This line is important for screen readers to hide the main app when the modal is open

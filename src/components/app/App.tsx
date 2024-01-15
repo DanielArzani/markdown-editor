@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
+
 import styled, { ThemeProvider } from 'styled-components';
 
+import { AvailableThemesType } from '../../types/availableThemesType';
 import { darkTheme, lightTheme } from '../../themes/themes';
 import Header from '../Header';
-import Sidebar from '../Sidebar';
-import ThemeToggle from '../ThemeToggle';
-import { AvailableThemesType } from '../../types/availableThemesType';
 import MarkdownEditor from '../MarkdownEditor';
 import PreviewPane from '../PreviewPane';
-import { useResizableEditor } from '../../hooks/useResizableEditor';
+import Sidebar from '../Sidebar';
+import ThemeToggle from '../ThemeToggle';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useResizableEditor } from '../../hooks/useResizableEditor';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -54,11 +55,6 @@ function App() {
   const handleTogglePreview = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsPreviewOpen((val) => !val);
   };
-
-  // Update markdown content
-  // const handleDocumentLoad = (content: string) => {
-  //   setMarkdown(content);
-  // };
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>

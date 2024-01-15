@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
+import styled from 'styled-components';
 
 import docLogo from '../../assets/icon-document.svg';
-import styled from 'styled-components';
 import media from '../../utils/mediaQueries';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 /**
  * Component for re-naming a document. Also displays the current document name. Has a stylistic bottom border
- * @param docName - The document name
- * @param setDocName - The setter function for the docName state
  */
 function DocumentName() {
   const { docName, handleDocNameChange } = useDocumentContext();

@@ -18,7 +18,7 @@ type SideBarProps = {
 /**
  *  A sidebar containing saved documents, the component to create a new document and the theme controller.
  * @param isMenuOpen - Used to toggle aria-hidden in order to hide content from screen readers when menu is closed
- * @param children
+ * @param children - Mainly for the abs positioned theme toggle
  */
 function Sidebar({ isMenuOpen, children }: SideBarProps) {
   if (!isMenuOpen) {

@@ -18,12 +18,11 @@ type MenuProps = {
  * @param toggleMenu - A wrapper for a setter function to toggle the menu
  * @param ariaControls - Should match the ID of the menu it controls
  * @example
- * <MenuIconContainer
-      onClick={toggleMenu}
-      aria-label={isOpen ? 'Close menu' : 'Open menu'}
-      aria-expanded={isOpen}
-      aria-controls='navigation' 
-    >
+ *  <Menu
+        isOpen={isMenuOpen}
+        toggleMenu={toggleMenu}
+        ariaControls='navigation'
+      />
  */
 function Menu({ isOpen, toggleMenu, ariaControls }: MenuProps) {
   const variants = {

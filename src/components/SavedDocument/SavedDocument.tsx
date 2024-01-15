@@ -12,7 +12,6 @@ type SavedDocumentProps = {
 /**
  * A saved document
  * @param document - A single markdown document
- * @param handleLoadDoc - Loads the content of a document
  */
 function SavedDocument({ document }: SavedDocumentProps) {
   const { handleLoadDoc } = useDocumentContext();

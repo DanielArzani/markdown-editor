@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import styled from 'styled-components';
 
+import DeleteIcon from '../DeleteIcon';
+import DocumentName from '../DocumentName';
 import Logo from '../Logo';
 import media from '../../utils/mediaQueries';
 import Menu from '../MenuIcon/Menu';
 import SaveButton from '../SaveButton';
-import DeleteIcon from '../DeleteIcon';
-import DocumentName from '../DocumentName';
-import createUniqueId from '../../utils/createUniqueId';
 
 type HeaderProps = {
   isMenuOpen: boolean;
@@ -15,7 +15,7 @@ type HeaderProps = {
 };
 
 /**
- * The project header. Contains the components for deleting, re-naming and saving documents as well as the menu
+ * The project header. Contains the components for deleting, re-naming and saving documents as well as the menu button
  * @param isMenuOpen - Indicates whether the menu is currently open or not
  * @param toggleMenu - Function for opening/closing the menu
  */

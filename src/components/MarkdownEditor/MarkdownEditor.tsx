@@ -19,14 +19,14 @@ const MarkdownEditor = ({
   handleTogglePreview,
   isPreviewOpen,
 }: MarkdownEditorProps) => {
-  const { currentDoc, markdown, handleSaveDoc, handleMarkdownChange } =
+  const { currentDoc, markdown, handleSaveDoc, handleMarkdownChange, docName } =
     useDocumentContext();
 
   // FIXME: Currently can only save the markdown content, not any file name changes
   // for saving when a user presses cmd + s
   const saveDocument = () => {
     if (currentDoc) {
-      handleSaveDoc(currentDoc.name, markdown);
+      handleSaveDoc(docName, markdown);
     }
   };
   // Use the custom hook for save shortcut

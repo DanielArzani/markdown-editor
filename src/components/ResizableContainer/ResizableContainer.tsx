@@ -11,6 +11,7 @@ type ResizableContainerProps = {
 /**
  * A ResizableContainer component allows resizing of its content
  * in all four directions: left, right, top, and bottom.
+ * ! NOT IN USE
  *
  * @param initialWidth - set the initial width of the container
  * @param initialHeight - set the initial height of the container

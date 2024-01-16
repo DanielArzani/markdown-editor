@@ -22,8 +22,6 @@ const MarkdownEditor = ({
   const { currentDoc, markdown, handleSaveDoc, handleMarkdownChange, docName } =
     useDocumentContext();
 
-  // FIXME: Currently can only save the markdown content, not any file name changes
-  // for saving when a user presses cmd + s
   const saveDocument = () => {
     if (currentDoc) {
       handleSaveDoc(docName, markdown);

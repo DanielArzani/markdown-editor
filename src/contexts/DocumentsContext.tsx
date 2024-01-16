@@ -114,11 +114,13 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
 
   // function to handle loading a previous document
   const handleLoadDoc = (chosenDocId: string) => {
-    //FIXME: When handleSaveDoc is called, it updates the documents state, which might not be reflected immediately due to the asynchronous nature of state updates in React. This can lead to the handleLoadDoc function not having the updated documents when it tries to load the new document.
-    //! Auto-save the current document before loading a new one
-    // if (currentDoc && currentDoc.name !== chosenDocId) {
-    //   handleSaveDoc(currentDoc.name, currentDoc.content);
-    // }
+    // Check if there's a current document and if it's different from the chosen one
+    if (currentDoc && currentDoc.id !== chosenDocId) {
+      // Auto-save the current document if there are unsaved changes
+      if (currentDoc.content !== markdown || currentDoc.name !== docName) {
+        handleSaveDoc(docName, markdown);
+      }
+    }
 
     // Load the chosen document
     const docToLoad = documents.find((doc) => doc.id === chosenDocId);

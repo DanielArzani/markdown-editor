@@ -172,6 +172,7 @@ span {
 .radio-switch {
   border: none;
   margin: 2.5rem auto;
+  margin-left: 0;
   padding: 0;
   white-space: nowrap;
   font-size: 0.825rem;

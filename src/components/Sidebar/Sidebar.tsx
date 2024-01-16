@@ -35,7 +35,7 @@ function Sidebar({ isMenuOpen, children }: SideBarProps) {
         <NewDocumentButton />
         <DocumentsList />
       </Nav>
-      {children}
+      <ChildrenContainer>{children}</ChildrenContainer>
     </Wrapper>
   );
 }
@@ -78,4 +78,11 @@ const Nav = styled.nav`
 
   height: 80%;
   overflow-y: scroll;
+`;
+
+const ChildrenContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
 `;

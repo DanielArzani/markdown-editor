@@ -11,9 +11,8 @@ import Sidebar from '../Sidebar';
 import ThemeToggle from '../ThemeToggle';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useResizableEditor } from '../../hooks/useResizableEditor';
-import { DocumentType } from '../../types/documentType';
-import { useDocumentContext } from '../../contexts/DocumentsContext';
 import UploadBackupButton from '../UploadBackupButton';
+import DownloadBackupButton from '../DownloadBackupButton';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -27,7 +26,6 @@ type MainProps = {
  * Markdown Editor App
  */
 function App() {
-  const { documents } = useDocumentContext();
   const [theme, setTheme] = useLocalStorage<AvailableThemesType>(
     'theme',
     'light',
@@ -60,28 +58,14 @@ function App() {
     setIsPreviewOpen((val) => !val);
   };
 
-  // for downloading documents as a backup
-  const downloadBackup = (documents: DocumentType[]) => {
-    const dataStr = JSON.stringify(documents);
-    const blob = new Blob([dataStr], { type: 'text/json;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'backup.json';
-    link.click();
-  };
-
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <Wrapper isMenuOpen={isMenuOpen} className={`theme-${theme}`}>
         <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
         <Sidebar isMenuOpen={isMenuOpen}>
-          <ThemeToggle theme={theme} onChange={handleThemeChange} />
-          <button onClick={() => downloadBackup(documents)}>
-            Download Backup Files
-          </button>
-
+          <DownloadBackupButton />
           <UploadBackupButton />
+          <ThemeToggle theme={theme} onChange={handleThemeChange} />
         </Sidebar>
 
         <Main width={editorWidth}>

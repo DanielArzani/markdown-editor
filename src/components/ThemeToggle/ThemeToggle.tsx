@@ -69,9 +69,9 @@ export default ThemeToggle;
 // accessible toggle from https://github.com/grace-snow/fmentor_pricing-component-with-toggle
 
 const Wrapper = styled.fieldset`
-  position: absolute;
+  /* position: absolute;
   bottom: 0;
-  left: 1.5rem;
+  left: 1.5rem; */
 `;
 
 // change fill colour of svg depending on the current theme

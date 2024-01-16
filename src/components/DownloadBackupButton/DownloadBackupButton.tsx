@@ -2,6 +2,10 @@ import React from 'react';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 import styled from 'styled-components';
 
+/**
+ * A button component that allows users to download a backup file (JSON)
+ * containing their current documents
+ */
 function DownloadBackupButton() {
   const { documents } = useDocumentContext();
 

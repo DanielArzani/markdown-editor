@@ -18,6 +18,7 @@ type DocumentContextType = {
   setCurrentDoc: React.Dispatch<React.SetStateAction<DocumentType | undefined>>;
   handleMarkdownChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleDocNameChange: (newName: string) => void;
+  handleLoadDocs: (listOfDocs: DocumentType[]) => void;
 };
 
 // Create the context with an initial empty state
@@ -51,6 +52,16 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
 
   const handleDocNameChange = (newName: string) => {
     setDocName(newName);
+  };
+
+  // function to upload documents from users side
+  const handleLoadDocs = (listOfDocs: DocumentType[]) => {
+    const prompt = window.confirm(
+      'Are you sure you want to replace your current documents?'
+    );
+    if (prompt) {
+      setDocuments(listOfDocs);
+    }
   };
 
   // function to handle creating a new document
@@ -156,6 +167,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
         handleDeleteDoc,
         handleMarkdownChange,
         handleDocNameChange,
+        handleLoadDocs,
       }}
     >
       {children}
@@ -176,6 +188,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
  * @returns handleMarkdownChange - For setting the new markdown state
  * @returns handleDocNameChange - For setting the new document name state
  * @returns setCurrentDoc - The setter function for the current document state variable
+ * @returns handleLoadDocs - Loads a json file from the users side and replaces the current documents with it
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

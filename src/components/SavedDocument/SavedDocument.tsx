@@ -20,9 +20,9 @@ function SavedDocument({ document }: SavedDocumentProps) {
 
   return (
     <Li>
-      <div>
+      <DocumentIconWrapper>
         <img src={DocumentIcon} alt='Document Icon' />
-      </div>
+      </DocumentIconWrapper>
       <Button
         onClick={() => {
           handleLoadDoc(id);
@@ -41,6 +41,10 @@ const Li = styled.li`
   display: flex;
   align-items: center;
   gap: 1rem;
+`;
+
+const DocumentIconWrapper = styled.div`
+  flex-shrink: 0;
 `;
 
 const Button = styled.button`

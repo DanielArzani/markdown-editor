@@ -6,8 +6,8 @@ import React, {
   useState,
 } from 'react';
 
-import createUniqueId from '../utils/createUniqueId';
 import { DocumentType } from '../types/documentType';
+import createUniqueId from '../utils/createUniqueId';
 import formatDate from '../utils/formatDate';
 import useLocalStorage from '../hooks/useLocalStorage';
 import mdCheatSheet from '../data/markdownCheatSheet';

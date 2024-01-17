@@ -9,6 +9,8 @@ import { motion } from 'framer-motion';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
 
 import { AvailableThemesType } from '../../types/availableThemesType';
 import PreviewToggleButton from '../PreviewToggleButton';
@@ -48,7 +50,8 @@ function PreviewPane({
       </Header>
       <MarkdownWrapper>
         <Markdown
-          remarkPlugins={[remarkGfm]}
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeKatex]}
           components={{
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
@@ -88,8 +91,8 @@ const Wrapper = styled(motion.div)`
 
   background-color: ${(props) => props.theme.editorBodyBg};
   border-bottom: 2.5px solid ${(props) => props.theme.editorSeparator};
-  overflow: auto;
   height: 100%;
+  overflow: auto;
 `;
 
 const Header = styled.header`
@@ -121,6 +124,7 @@ const MarkdownWrapper = styled.div`
   height: 100%;
   padding-left: 1rem;
   padding-top: 1rem;
+  height: calc(100vh - 2rem);
 
   & * {
     color: ${(props) => props.theme.editorBodyText};

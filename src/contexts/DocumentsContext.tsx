@@ -1,9 +1,16 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import createUniqueId from '../utils/createUniqueId';
 import { DocumentType } from '../types/documentType';
 import formatDate from '../utils/formatDate';
 import useLocalStorage from '../hooks/useLocalStorage';
+import mdCheatSheet from '../data/markdownCheatSheet';
 
 // shape of context data
 type DocumentContextType = {
@@ -19,6 +26,7 @@ type DocumentContextType = {
   handleMarkdownChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleDocNameChange: (newName: string) => void;
   handleLoadDocs: (listOfDocs: DocumentType[]) => void;
+  handleFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 // Create the context with an initial empty state
@@ -38,10 +46,28 @@ type DocumentProviderProps = {
 export const DocumentProvider = ({ children }: DocumentProviderProps) => {
   const [documents, setDocuments] = useLocalStorage<DocumentType[]>('docs', []);
   const [currentDoc, setCurrentDoc] = useState<DocumentType>();
-  const [markdown, setMarkdown] = useState('');
+  const [markdown, setMarkdown] = useState<string>('');
   const [docName, setDocName] = useState<string>(
     `Doc-${createUniqueId().slice(1, 5)}`
   );
+
+  // Create new welcome.md with markdown cheat sheet as content if there're no saved files
+  useEffect(() => {
+    if (documents.length === 0 && markdown === '') {
+      const welcomeDoc: DocumentType = {
+        id: createUniqueId(),
+        name: 'welcome.md',
+        createdAt: formatDate(Date.now()),
+        content: mdCheatSheet(),
+      };
+
+      // Update state to include the welcome document
+      setDocuments([welcomeDoc]);
+      setCurrentDoc(welcomeDoc);
+      setMarkdown(welcomeDoc.content);
+      setDocName(welcomeDoc.name);
+    }
+  }, [documents, markdown, setDocuments]);
 
   // controls the text field input for writing the markdown
   const handleMarkdownChange = (
@@ -55,12 +81,63 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
   };
 
   // function to upload documents from users side
-  const handleLoadDocs = (listOfDocs: DocumentType[]) => {
+  const handleLoadDocs = (newDocs: DocumentType[]) => {
     const prompt = window.confirm(
       'Are you sure you want to replace your current documents?'
     );
-    if (prompt) {
-      setDocuments(listOfDocs);
+    if (prompt && newDocs.length > 0) {
+      setDocuments(newDocs);
+      const firstDoc = newDocs[0];
+      setCurrentDoc(firstDoc);
+      setMarkdown(firstDoc.content);
+      setDocName(firstDoc.name);
+    }
+  };
+
+  /**
+   * Handles the file upload event, reads the file, parses it as JSON,
+   * and then loads the documents into the application.
+   * Added functionality in order for it to be able to upload .md files
+   * @param event - The file upload event.
+   */
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const fileName = file.name; // Get the file name
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const contents = e.target?.result;
+
+        if (file.type === 'application/json') {
+          // Existing JSON file logic
+          try {
+            const documents = JSON.parse(contents as string) as DocumentType[];
+            handleLoadDocs(documents);
+          } catch (error) {
+            console.error('Error parsing the JSON file', error);
+          }
+        } else if (
+          file.type === 'text/markdown' ||
+          file.type === 'text/x-markdown'
+        ) {
+          // Handle Markdown file
+          const newDoc: DocumentType = {
+            id: createUniqueId(), // Use your existing ID creation method
+            name: fileName,
+            createdAt: formatDate(Date.now()), // Use your existing date format method
+            content: contents as string,
+          };
+          // Update the current document, markdown, and docName states
+          setCurrentDoc(newDoc);
+          setMarkdown(newDoc.content);
+          setDocName(newDoc.name);
+        } else {
+          alert('Please select a Markdown or JSON file.');
+        }
+      };
+
+      reader.readAsText(file);
     }
   };
 
@@ -168,6 +245,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
         handleMarkdownChange,
         handleDocNameChange,
         handleLoadDocs,
+        handleFileUpload,
       }}
     >
       {children}
@@ -189,6 +267,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
  * @returns handleDocNameChange - For setting the new document name state
  * @returns setCurrentDoc - The setter function for the current document state variable
  * @returns handleLoadDocs - Loads a json file from the users side and replaces the current documents with it
+ * @returns handleFileUpload - Handles the uploading of a .md file or a json file
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

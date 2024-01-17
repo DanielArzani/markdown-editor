@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import PreviewToggleButton from '../PreviewToggleButton';
 import { motion } from 'framer-motion';
+
+import PreviewToggleButton from '../PreviewToggleButton';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 import useSaveShortcut from '../../hooks/useSaveShortcut';
 
@@ -49,8 +50,8 @@ const MarkdownEditor = ({
         <StyledTextarea
           value={markdown}
           onChange={handleMarkdownChange}
-          placeholder='Write your markdown here...'
           aria-label='Markdown editor'
+          placeholder='Write your markdown here...'
           id='markdown-editor'
         />
       </EditorContainer>

@@ -172,7 +172,30 @@ const MarkdownWrapper = styled.div`
   & h5,
   & h6 {
     color: ${(props) => props.theme.previewHeaders};
-    font-size: 2rem;
+  }
+
+  & h1 {
+    font-size: 4.85rem;
+  }
+
+  & h2 {
+    font-size: 3.64rem;
+  }
+
+  & h3 {
+    font-size: 2.84rem;
+  }
+
+  & h4 {
+    font-size: 2.43rem;
+  }
+
+  & h5 {
+    font-size: 2.01rem;
+  }
+
+  & h6 {
+    font-size: 1.625rem;
   }
 
   & p {

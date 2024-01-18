@@ -99,6 +99,10 @@ select {
   font-weight: 400;
 }
 
+textarea {
+  font-family: 'Dancing Script', cursive;
+}
+
 button {
   border: none;
   cursor: pointer;

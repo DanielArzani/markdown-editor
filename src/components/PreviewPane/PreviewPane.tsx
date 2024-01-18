@@ -22,7 +22,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import rehypeSanitize from 'rehype-sanitize';
 import rehypeMeta from 'rehype-meta';
-import rehypePicture from 'rehype-picture';
 import rehypeReact from 'rehype-react';
 
 import { AvailableThemesType } from '../../types/availableThemesType';
@@ -79,7 +78,6 @@ function PreviewPane({
             rehypeSlug,
             rehypeSanitize,
             rehypeMeta,
-            rehypePicture,
             rehypeReact,
           ]}
           components={{
@@ -156,7 +154,36 @@ const MarkdownWrapper = styled.div`
   padding-top: 1rem;
   height: calc(100vh - 2rem);
 
+  //*********************
+  //  PREVIEW STYLES
+  //*********************
+
   & * {
     color: ${(props) => props.theme.editorBodyText};
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro',
+      monospace;
+  }
+
+  & h1 {
+    color: ${(props) => props.theme.headerH1};
+  }
+  & h2 {
+    color: ${(props) => props.theme.headerH2};
+  }
+  & h3 {
+    color: ${(props) => props.theme.headerH3};
+  }
+
+  & p {
+    color: purple;
+    font-size: 1rem;
+  }
+
+  & ul,
+  & ol {
+    padding-left: 20px;
+    & li::before {
+      color: ${(props) => props.theme.listItemBulletColor};
+    }
   }
 `;

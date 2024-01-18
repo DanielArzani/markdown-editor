@@ -52,6 +52,18 @@ export const lightTheme = {
   editorSeparator: '#E4E4E4',
   togglePreviewDefault: '#7C8187',
   togglePreviewActive: '#E46643',
+
+  //*********************
+  //  EDITOR STYLES
+  //*********************
+  headerH1: '#E46643',
+  headerH2: '#F39765',
+  headerH3: '#7C8187',
+  listItemBulletColor: '#E46643',
+
+  //*********************
+  //  PREVIEW STYLES
+  //*********************
 };
 
 export const darkTheme = {
@@ -108,6 +120,18 @@ export const darkTheme = {
   editorSeparator: '#5A6069',
   togglePreviewDefault: '#C1C4CB',
   togglePreviewActive: '#E46643',
+
+  //*********************
+  //  EDITOR STYLES
+  //*********************
+  headerH1: '#E46643',
+  headerH2: '#F39765',
+  headerH3: '#7C8187',
+  listItemBulletColor: '#E46643',
+
+  //*********************
+  //  PREVIEW STYLES
+  //*********************
 };
 
 // For creating global styles

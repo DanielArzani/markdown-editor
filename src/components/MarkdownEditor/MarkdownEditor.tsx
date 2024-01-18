@@ -68,6 +68,7 @@ const Wrapper = styled(motion.div)`
   border-right: 1px solid ${(props) => props.theme.editorSeparator};
   border-bottom: 2.5px solid ${(props) => props.theme.editorSeparator};
   height: 100%;
+  height: calc(100vh - 5rem);
 `;
 
 const Header = styled.header`
@@ -95,7 +96,7 @@ const EditorContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  height: calc(100% - 2rem);
+  height: 100%;
 `;
 
 const StyledTextarea = styled.textarea`

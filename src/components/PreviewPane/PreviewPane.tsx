@@ -119,8 +119,8 @@ const Wrapper = styled(motion.div)`
 
   background-color: ${(props) => props.theme.editorBodyBg};
   border-bottom: 2.5px solid ${(props) => props.theme.editorSeparator};
-  height: 100%;
-  overflow: auto;
+  /* height: 100%; */
+  height: calc(100vh - 5rem);
 `;
 
 const Header = styled.header`
@@ -154,7 +154,7 @@ const MarkdownWrapper = styled.div`
   height: 100%;
   padding-left: 1rem;
   padding-top: 1rem;
-  height: calc(100vh - 2rem);
+  overflow: auto;
 
   //*********************
   //  PREVIEW STYLES

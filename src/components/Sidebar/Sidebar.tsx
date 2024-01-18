@@ -76,7 +76,7 @@ const Nav = styled.nav`
   flex-direction: column;
   gap: 1.8rem;
 
-  height: 80%;
+  height: 73%;
   overflow-y: scroll;
 `;
 

@@ -126,6 +126,7 @@ const Wrapper = styled(motion.div)`
 const Header = styled.header`
   display: flex;
   align-items: center;
+  gap: 1rem;
   justify-content: space-between;
 
   background-color: ${(props) => props.theme.editorHeaderBg};
@@ -147,6 +148,7 @@ const H2 = styled.h2`
 const MarkdownWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   background-color: ${(props) => props.theme.editorBodyBg};
   height: 100%;
@@ -164,26 +166,37 @@ const MarkdownWrapper = styled.div`
       monospace;
   }
 
-  & h1 {
-    color: ${(props) => props.theme.headerH1};
-  }
-  & h2 {
-    color: ${(props) => props.theme.headerH2};
-  }
-  & h3 {
-    color: ${(props) => props.theme.headerH3};
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    color: ${(props) => props.theme.previewHeaders};
+    font-size: 2rem;
   }
 
   & p {
-    color: purple;
-    font-size: 1rem;
+    color: ${(props) => props.theme.previewParagraph};
+    font-size: 1.5rem;
   }
 
   & ul,
   & ol {
-    padding-left: 20px;
+    padding-left: 40px;
+  }
+
+  & li {
+    margin-top: 0.75rem;
+  }
+
+  & ul,
+  & ol,
+  & li {
+    font-size: 1.5rem;
+
     & li::before {
-      color: ${(props) => props.theme.listItemBulletColor};
+      color: ${(props) => props.theme.previewLi};
     }
   }
 `;

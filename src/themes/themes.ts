@@ -54,16 +54,13 @@ export const lightTheme = {
   togglePreviewActive: '#E46643',
 
   //*********************
-  //  EDITOR STYLES
-  //*********************
-  headerH1: '#E46643',
-  headerH2: '#F39765',
-  headerH3: '#7C8187',
-  listItemBulletColor: '#E46643',
-
-  //*********************
   //  PREVIEW STYLES
   //*********************
+  previewHeaders: '#E46643',
+  previewParagraph: '#2B2D31',
+  previewBlockQuote: '#35393F',
+  previewLi: '#7C8187',
+  previewAnchor: '#E46643',
 };
 
 export const darkTheme = {
@@ -122,16 +119,13 @@ export const darkTheme = {
   togglePreviewActive: '#E46643',
 
   //*********************
-  //  EDITOR STYLES
-  //*********************
-  headerH1: '#E46643',
-  headerH2: '#F39765',
-  headerH3: '#7C8187',
-  listItemBulletColor: '#E46643',
-
-  //*********************
   //  PREVIEW STYLES
   //*********************
+  previewHeaders: '#E46643',
+  previewParagraph: '#C1C4CB',
+  previewBlockQuote: '#7C8187',
+  previewLi: '#7C8187',
+  previewAnchor: '#E46643',
 };
 
 // For creating global styles

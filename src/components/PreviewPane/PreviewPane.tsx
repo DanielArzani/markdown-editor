@@ -119,7 +119,6 @@ const Wrapper = styled(motion.div)`
 
   background-color: ${(props) => props.theme.editorBodyBg};
   border-bottom: 2.5px solid ${(props) => props.theme.editorSeparator};
-  /* height: 100%; */
   height: calc(100vh - 5rem);
 `;
 
@@ -198,5 +197,9 @@ const MarkdownWrapper = styled.div`
     & li::before {
       color: ${(props) => props.theme.previewLi};
     }
+  }
+
+  & a {
+    color: ${(props) => props.theme.previewAnchor};
   }
 `;

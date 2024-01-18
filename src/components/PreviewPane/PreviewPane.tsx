@@ -175,27 +175,27 @@ const MarkdownWrapper = styled.div`
   }
 
   & h1 {
-    font-size: 4.85rem;
+    font-size: 2.85rem;
   }
 
   & h2 {
-    font-size: 3.64rem;
+    font-size: 2.64rem;
   }
 
   & h3 {
-    font-size: 2.84rem;
+    font-size: 1.84rem;
   }
 
   & h4 {
-    font-size: 2.43rem;
+    font-size: 1.43rem;
   }
 
   & h5 {
-    font-size: 2.01rem;
+    font-size: 1.01rem;
   }
 
   & h6 {
-    font-size: 1.625rem;
+    font-size: 0.9rem;
   }
 
   & p {

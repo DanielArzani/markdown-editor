@@ -1,16 +1,29 @@
 import React from 'react';
-
+import Markdown from 'react-markdown';
+import { motion } from 'framer-motion';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {
   dark,
   duotoneLight,
 } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import Markdown from 'react-markdown';
-import { motion } from 'framer-motion';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
-import rehypeKatex from 'rehype-katex';
+
+import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import remarkToc from 'remark-toc';
+import emoji from 'remark-emoji';
+import remarkBreaks from 'remark-breaks';
+import codeTitle from 'remark-code-title';
+import remarkImages from 'remark-images';
+import smartypants from 'remark-smartypants';
+
+import rehypeKatex from 'rehype-katex';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
+import rehypeSanitize from 'rehype-sanitize';
+import rehypeMeta from 'rehype-meta';
+import rehypePicture from 'rehype-picture';
+import rehypeReact from 'rehype-react';
 
 import { AvailableThemesType } from '../../types/availableThemesType';
 import PreviewToggleButton from '../PreviewToggleButton';
@@ -50,8 +63,25 @@ function PreviewPane({
       </Header>
       <MarkdownWrapper>
         <Markdown
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
+          remarkPlugins={[
+            remarkGfm,
+            remarkMath,
+            [remarkToc, { heading: 'TOC' }],
+            emoji,
+            remarkBreaks,
+            codeTitle,
+            remarkImages,
+            smartypants,
+          ]}
+          rehypePlugins={[
+            rehypeKatex,
+            rehypeAutolinkHeadings,
+            rehypeSlug,
+            rehypeSanitize,
+            rehypeMeta,
+            rehypePicture,
+            rehypeReact,
+          ]}
           components={{
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore

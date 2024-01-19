@@ -180,6 +180,10 @@ const MarkdownWrapper = styled.div`
 
   & h2 {
     font-size: 2.64rem;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 1rem;
+    text-decoration-color: ${(props) => props.theme.previewHeaders};
   }
 
   & h3 {

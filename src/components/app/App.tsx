@@ -13,7 +13,6 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import { useResizableEditor } from '../../hooks/useResizableEditor';
 import UploadBackupButton from '../UploadBackupButton';
 import DownloadBackupButton from '../DownloadBackupButton';
-import media from '../../utils/mediaQueries';
 
 type WrapperProps = {
   isMenuOpen: boolean;
@@ -93,7 +92,9 @@ const Wrapper = styled.div<WrapperProps>`
   display: grid;
   grid-template-rows: 74px 1fr;
   grid-template-columns: ${(props) =>
-    props.isMenuOpen ? `15.625rem 1fr` : '0px 1fr'};
+    props.isMenuOpen
+      ? `15.625rem MIN(calc(1920px - 15.625rem), 100%)`
+      : '0px MIN(1920px, 100%)'};
   transition: grid-template-columns 0.3s;
 
   background-color: ${(props) => props.theme.editorHeaderBg};
@@ -102,6 +103,7 @@ const Wrapper = styled.div<WrapperProps>`
   position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
+  max-width: 1920px;
 
   & > header {
     grid-column: 2/-1;

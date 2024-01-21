@@ -25,6 +25,7 @@ type BaseButtonProps = {
   padding?: string;
   height?: string;
   width?: string;
+  hasAnimation?: boolean;
   onClick?: () => void;
 };
 
@@ -34,6 +35,7 @@ type BaseButtonProps = {
  * @param padding - Padding of the button
  * @param height - Height of the button
  * @param width - Width of the button
+ * @param hasAnimation - If the button has the spring animation of growing larger or not, the transition animation on the background colour will not be changed.
  * @param onClick - Any sort of handler that should perform something when the button is clicked
  * @example
  * <Button height="2rem">
@@ -48,14 +50,15 @@ function BaseButton({
   padding = '',
   height = '',
   width = '',
+  hasAnimation = true,
 }: BaseButtonProps) {
   return (
     <Button
       onClick={onClick}
       style={{ height: height, width: width, padding: padding }}
-      whileHover={hoverAnimation}
-      initial={unhoverAnimation}
-      animate={unhoverAnimation}
+      whileHover={hasAnimation ? hoverAnimation : {}}
+      initial={hasAnimation ? unhoverAnimation : {}}
+      animate={hasAnimation ? unhoverAnimation : {}}
     >
       {children}
     </Button>

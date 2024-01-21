@@ -58,8 +58,11 @@ const StyledHeader = styled.header`
   border: 1px solid black;
   margin-inline: auto;
   padding-inline-end: 0.5rem;
-  overflow-x: auto;
   width: 100%;
+
+  @media ${media.xsm} {
+    overflow-x: scroll;
+  }
 
   @media ${media.md} {
     padding-inline-end: 1rem;

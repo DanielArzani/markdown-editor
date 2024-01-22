@@ -25,6 +25,7 @@ type BaseButtonProps = {
   padding?: string;
   height?: string;
   width?: string;
+  hasAnimation?: boolean;
   onClick?: () => void;
 };
 
@@ -34,6 +35,7 @@ type BaseButtonProps = {
  * @param padding - Padding of the button
  * @param height - Height of the button
  * @param width - Width of the button
+ * @param hasAnimation - Determines whether button has framer motion animation, it doesn't effect the css transition animations
  * @param onClick - Any sort of handler that should perform something when the button is clicked
  * @example
  * <Button height="2rem">
@@ -48,14 +50,15 @@ function BaseButton({
   padding = '',
   height = '',
   width = '',
+  hasAnimation = true,
 }: BaseButtonProps) {
   return (
     <Button
       onClick={onClick}
       style={{ height: height, width: width, padding: padding }}
-      whileHover={hoverAnimation}
-      initial={unhoverAnimation}
-      animate={unhoverAnimation}
+      whileHover={hasAnimation ? hoverAnimation : undefined}
+      initial={hasAnimation ? unhoverAnimation : undefined}
+      animate={hasAnimation ? unhoverAnimation : undefined}
     >
       {children}
     </Button>

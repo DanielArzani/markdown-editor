@@ -25,6 +25,7 @@ function NewDocumentButton() {
       onClick={() => handleCreateDoc(currentDoc)}
       padding={'.75rem 2rem'}
       width='100%'
+      hasAnimation={false}
     >
       + New Document
     </Button>

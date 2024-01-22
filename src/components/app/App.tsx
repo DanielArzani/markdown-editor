@@ -98,10 +98,9 @@ const Wrapper = styled.div<WrapperProps>`
 
   background-color: ${(props) => props.theme.editorHeaderBg};
   height: 100vh;
-  /* max-width: 90rem; */
   margin: 0 auto;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
 
   & > header {
     grid-column: 2/-1;

@@ -77,7 +77,7 @@ const Nav = styled.nav`
   gap: 1.8rem;
 
   height: 73%;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const ChildrenContainer = styled.div`

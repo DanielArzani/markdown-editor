@@ -49,6 +49,7 @@ function App() {
   const editorWidth = useResizableEditor({
     initialWidth: '50%',
     minWidth: 200,
+    maxWidth: 1720,
     resizerRef: resizerRef,
     isPreviewOpen: isPreviewOpen,
   });
@@ -97,7 +98,7 @@ const Wrapper = styled.div<WrapperProps>`
 
   background-color: ${(props) => props.theme.editorHeaderBg};
   height: 100vh;
-  max-width: 90rem;
+  /* max-width: 90rem; */
   margin: 0 auto;
   position: relative;
   overflow-x: hidden;

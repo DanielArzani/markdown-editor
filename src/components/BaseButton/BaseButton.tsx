@@ -35,7 +35,11 @@ type BaseButtonProps = {
  * @param padding - Padding of the button
  * @param height - Height of the button
  * @param width - Width of the button
+<<<<<<< HEAD
  * @param hasAnimation - If the button has the spring animation of growing larger or not, the transition animation on the background colour will not be changed.
+=======
+ * @param hasAnimation - Determines whether button has framer motion animation, it doesn't effect the css transition animations
+>>>>>>> bug-fixes
  * @param onClick - Any sort of handler that should perform something when the button is clicked
  * @example
  * <Button height="2rem">
@@ -56,9 +60,15 @@ function BaseButton({
     <Button
       onClick={onClick}
       style={{ height: height, width: width, padding: padding }}
+<<<<<<< HEAD
       whileHover={hasAnimation ? hoverAnimation : {}}
       initial={hasAnimation ? unhoverAnimation : {}}
       animate={hasAnimation ? unhoverAnimation : {}}
+=======
+      whileHover={hasAnimation ? hoverAnimation : undefined}
+      initial={hasAnimation ? unhoverAnimation : undefined}
+      animate={hasAnimation ? unhoverAnimation : undefined}
+>>>>>>> bug-fixes
     >
       {children}
     </Button>

@@ -3,6 +3,7 @@ import { useEffect, useState, RefObject, useRef } from 'react';
 type UseResizableEditorProps = {
   initialWidth: string;
   minWidth: number;
+  maxWidth: string;
   resizerRef: RefObject<HTMLDivElement>;
   isPreviewOpen: boolean;
 };
@@ -11,12 +12,14 @@ type UseResizableEditorProps = {
  * Custom hook to manage the resizing of an editor component.
  * @param initialWidth - The initial width of the editor.
  * @param minWidth - The minimum width the editor can be resized to.
+ * @param maxWidth - The maximum width the editor can be resized to.
  * @param resizerRef - A reference to the resizing element.
  * @param isPreviewOpen - State variable for indicating whether the previewPane is open or not, if its not then the editor should take the full width
  */
 export const useResizableEditor = ({
   initialWidth,
   minWidth,
+  maxWidth,
   resizerRef,
   isPreviewOpen,
 }: UseResizableEditorProps) => {
@@ -24,12 +27,25 @@ export const useResizableEditor = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const calculateMaxWidth = () => {
+      if (maxWidth.endsWith('%')) {
+        // Convert percentage to pixels
+        const maxPercentage = parseFloat(maxWidth) / 100;
+        return window.innerWidth * maxPercentage;
+      } else if (maxWidth.endsWith('vw')) {
+        // Convert vw to pixels
+        const maxVW = parseFloat(maxWidth);
+        return window.innerWidth * (maxVW / 100);
+      }
+      return parseFloat(maxWidth); // If it's not a percentage or vw, parse as float
+    };
+
+    const maxEditorWidth = calculateMaxWidth();
+
     // Function to handle the resizing action
     const handleResize = (e: MouseEvent) => {
-      // Calculate new width based on mouse position
       const newWidth = e.clientX - (document.body.offsetLeft || 0);
-      // Update the width if it's greater than the minimum width
-      if (newWidth > minWidth) {
+      if (newWidth > minWidth && newWidth < maxEditorWidth) {
         setEditorWidth(`${newWidth}px`);
       }
     };
@@ -78,7 +94,7 @@ export const useResizableEditor = ({
         }
       };
     }
-  }, [minWidth, resizerRef, isPreviewOpen, initialWidth]);
+  }, [minWidth, maxWidth, resizerRef, isPreviewOpen, initialWidth]);
 
   return editorWidth;
 };

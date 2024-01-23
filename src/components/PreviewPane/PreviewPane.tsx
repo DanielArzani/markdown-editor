@@ -151,8 +151,8 @@ const MarkdownWrapper = styled.div`
 
   background-color: ${(props) => props.theme.editorBodyBg};
   height: 100%;
-  padding-left: 1rem;
-  padding-top: 1rem;
+  padding: 1rem;
+
   overflow: auto;
 
   //*********************

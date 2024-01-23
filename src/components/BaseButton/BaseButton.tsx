@@ -60,15 +60,9 @@ function BaseButton({
     <Button
       onClick={onClick}
       style={{ height: height, width: width, padding: padding }}
-<<<<<<< HEAD
-      whileHover={hasAnimation ? hoverAnimation : {}}
-      initial={hasAnimation ? unhoverAnimation : {}}
-      animate={hasAnimation ? unhoverAnimation : {}}
-=======
       whileHover={hasAnimation ? hoverAnimation : undefined}
       initial={hasAnimation ? unhoverAnimation : undefined}
       animate={hasAnimation ? unhoverAnimation : undefined}
->>>>>>> bug-fixes
     >
       {children}
     </Button>

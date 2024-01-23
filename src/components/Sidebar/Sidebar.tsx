@@ -54,7 +54,7 @@ const Wrapper = styled.aside`
 const LogoHeader = styled.header<LogoHeaderProps>`
   margin-top: 1.8rem;
 
-  @media ${media.l} {
+  @media ${media.lg} {
     display: none;
   }
 `;

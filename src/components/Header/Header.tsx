@@ -57,23 +57,9 @@ const StyledHeader = styled.header`
   background-color: ${(props) => props.theme.headerBg};
   border: 1px solid black;
   margin-inline: auto;
-<<<<<<< HEAD
-  padding-inline-end: 0.5rem;
-  width: 100%;
-
-  @media ${media.xsm} {
-    overflow-x: scroll;
-  }
-
-  @media ${media.md} {
-    padding-inline-end: 1rem;
-    overflow-x: auto;
-  }
-=======
   padding-inline-end: 1rem;
   overflow: auto;
   width: 100%;
->>>>>>> bug-fixes
 `;
 
 const MinorWrapper = styled.div`

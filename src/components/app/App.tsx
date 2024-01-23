@@ -19,6 +19,7 @@ type WrapperProps = {
 };
 
 type MainProps = {
+  isPreviewOpen: boolean;
   width: string;
 };
 
@@ -49,7 +50,7 @@ function App() {
   const editorWidth = useResizableEditor({
     initialWidth: '50%',
     minWidth: 200,
-    maxWidth: 1720,
+    maxWidth: '80vw',
     resizerRef: resizerRef,
     isPreviewOpen: isPreviewOpen,
   });
@@ -69,13 +70,15 @@ function App() {
           <ThemeToggle theme={theme} onChange={handleThemeChange} />
         </Sidebar>
 
-        <Main width={editorWidth}>
-          <MarkdownEditor
-            isPreviewOpen={isPreviewOpen}
-            handleTogglePreview={handleTogglePreview}
-          />
-          {/* For resizing the component */}
-          <ResizeHandler ref={resizerRef} id='resizer' />
+        <Main width={editorWidth} isPreviewOpen={isPreviewOpen}>
+          <EditorAndResizerWrapper>
+            <MarkdownEditor
+              isPreviewOpen={isPreviewOpen}
+              handleTogglePreview={handleTogglePreview}
+            />
+            {/* For resizing the component */}
+            <ResizeHandler ref={resizerRef} id='resizer' />
+          </EditorAndResizerWrapper>
           <PreviewPane
             handleTogglePreview={handleTogglePreview}
             isPreviewOpen={isPreviewOpen}
@@ -122,7 +125,12 @@ const Main = styled.main<MainProps>`
 
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: ${(props) => props.width} 2.5px 1fr;
+  grid-template-columns: ${(props) => props.width} 1fr;
+`;
+
+const EditorAndResizerWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2.5px;
 `;
 
 // the thing that is clicked on and dragged in order to resize a component

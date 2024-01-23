@@ -57,13 +57,9 @@ const StyledHeader = styled.header`
   background-color: ${(props) => props.theme.headerBg};
   border: 1px solid black;
   margin-inline: auto;
-  padding-inline-end: 0.5rem;
-  overflow-x: scroll;
+  padding-inline-end: 1rem;
+  overflow: auto;
   width: 100%;
-
-  @media ${media.md} {
-    padding-inline-end: 1rem;
-  }
 `;
 
 const MinorWrapper = styled.div`
@@ -79,7 +75,7 @@ const MinorWrapper = styled.div`
 const LogoWrapper = styled.div`
   display: none;
 
-  @media ${media.l} {
+  @media ${media.lg} {
     display: flex;
     align-items: center;
     justify-content: space-between;

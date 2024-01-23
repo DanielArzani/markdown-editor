@@ -115,25 +115,4 @@ const StyledTextarea = styled.textarea`
   &:focus {
     outline: none; // Custom focus styles can be added
   }
-
-  //*********************
-  //  MARKDOWN STYLES
-  //*********************
-  /*! Doesn't work! */
-  & h1 {
-    color: ${(props) => props.theme.headerH1};
-  }
-  & h2 {
-    color: ${(props) => props.theme.headerH2};
-  }
-  & h3 {
-    color: ${(props) => props.theme.headerH3};
-  }
-  & ul,
-  & ol {
-    padding-left: 20px;
-    & li::before {
-      color: ${(props) => props.theme.listItemBulletColor};
-    }
-  }
 `;

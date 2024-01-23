@@ -3,7 +3,7 @@ import { useEffect, useState, RefObject, useRef } from 'react';
 type UseResizableEditorProps = {
   initialWidth: string;
   minWidth: number;
-  maxWidth: number;
+  maxWidth: string;
   resizerRef: RefObject<HTMLDivElement>;
   isPreviewOpen: boolean;
 };
@@ -27,12 +27,25 @@ export const useResizableEditor = ({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const calculateMaxWidth = () => {
+      if (maxWidth.endsWith('%')) {
+        // Convert percentage to pixels
+        const maxPercentage = parseFloat(maxWidth) / 100;
+        return window.innerWidth * maxPercentage;
+      } else if (maxWidth.endsWith('vw')) {
+        // Convert vw to pixels
+        const maxVW = parseFloat(maxWidth);
+        return window.innerWidth * (maxVW / 100);
+      }
+      return parseFloat(maxWidth); // If it's not a percentage or vw, parse as float
+    };
+
+    const maxEditorWidth = calculateMaxWidth();
+
     // Function to handle the resizing action
     const handleResize = (e: MouseEvent) => {
-      // Calculate new width based on mouse position
       const newWidth = e.clientX - (document.body.offsetLeft || 0);
-      // Update the width if it's within the min and max width bounds
-      if (newWidth > minWidth && newWidth < maxWidth) {
+      if (newWidth > minWidth && newWidth < maxEditorWidth) {
         setEditorWidth(`${newWidth}px`);
       }
     };

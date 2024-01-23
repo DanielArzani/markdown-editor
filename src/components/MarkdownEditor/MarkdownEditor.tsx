@@ -111,6 +111,8 @@ const StyledTextarea = styled.textarea`
   font-size: 1.5rem;
   line-height: 1.5;
   resize: none;
+  word-wrap: break-word; // Ensures that long words will break and wrap onto the next line
+  overflow-wrap: break-word; // This is the standard version of the same property
 
   &:focus {
     outline: none; // Custom focus styles can be added

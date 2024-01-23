@@ -154,6 +154,8 @@ const MarkdownWrapper = styled.div`
   padding: 1rem;
 
   overflow: auto;
+  word-wrap: break-word; // Ensures that long words will break and wrap onto the next line
+  overflow-wrap: break-word; // This is the standard version of the same property
 
   //*********************
   //  PREVIEW STYLES

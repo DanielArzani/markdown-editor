@@ -175,11 +175,19 @@ const MarkdownWrapper = styled.div`
   }
 
   & h1 {
-    font-size: 2.85rem;
+    font-size: clamp(
+      2.125rem,
+      2.013888888888889rem + 0.5555555555555556vw,
+      2.5rem
+    );
   }
 
   & h2 {
-    font-size: 2.64rem;
+    font-size: clamp(
+      2rem,
+      1.8888888888888888rem + 0.5555555555555556vw,
+      2.375rem
+    );
     text-decoration: underline;
     text-decoration-thickness: 2px;
     text-underline-offset: 1rem;
@@ -187,24 +195,44 @@ const MarkdownWrapper = styled.div`
   }
 
   & h3 {
-    font-size: 1.84rem;
+    font-size: clamp(
+      1.625rem,
+      1.5138888888888888rem + 0.5555555555555556vw,
+      2rem
+    );
   }
 
   & h4 {
-    font-size: 1.43rem;
+    font-size: clamp(
+      1.375rem,
+      1.2638888888888888rem + 0.5555555555555556vw,
+      1.75rem
+    );
   }
 
   & h5 {
-    font-size: 1.01rem;
+    font-size: clamp(
+      1.25rem,
+      1.175925925925926rem + 0.3703703703703704vw,
+      1.5rem
+    );
   }
 
   & h6 {
-    font-size: 0.9rem;
+    font-size: clamp(
+      1.125rem,
+      1.087962962962963rem + 0.1851851851851852vw,
+      1.25rem
+    );
   }
 
   & p {
     color: ${(props) => props.theme.previewParagraph};
-    font-size: 1.5rem;
+    font-size: clamp(
+      0.875rem,
+      0.837962962962963rem + 0.1851851851851852vw,
+      1rem
+    );
   }
 
   & ul,
@@ -219,7 +247,11 @@ const MarkdownWrapper = styled.div`
   & ul,
   & ol,
   & li {
-    font-size: 1.5rem;
+    font-size: clamp(
+      0.875rem,
+      0.837962962962963rem + 0.1851851851851852vw,
+      1rem
+    );
 
     & li::before {
       color: ${(props) => props.theme.previewLi};
@@ -228,5 +260,10 @@ const MarkdownWrapper = styled.div`
 
   & a {
     color: ${(props) => props.theme.previewAnchor};
+    font-size: clamp(
+      0.875rem,
+      0.837962962962963rem + 0.1851851851851852vw,
+      1rem
+    );
   }
 `;

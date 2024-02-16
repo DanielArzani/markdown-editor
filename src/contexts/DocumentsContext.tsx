@@ -27,6 +27,7 @@ type DocumentContextType = {
   handleDocNameChange: (newName: string) => void;
   handleLoadDocs: (listOfDocs: DocumentType[]) => void;
   handleFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleReOrderDocs: (listOfDocs: DocumentType[]) => void;
 };
 
 // Create the context with an initial empty state
@@ -230,6 +231,14 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
     setDocName('Welcome.md');
   };
 
+  /**
+   * When a document has finished being dropped into a new location, this will update the list
+   * @param newDocsList - The new updated order of documents
+   */
+  const handleReOrderDocs = (newDocsList: DocumentType[]) => {
+    setDocuments(newDocsList);
+  };
+
   return (
     <DocumentContext.Provider
       value={{
@@ -246,6 +255,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
         handleDocNameChange,
         handleLoadDocs,
         handleFileUpload,
+        handleReOrderDocs,
       }}
     >
       {children}
@@ -268,6 +278,7 @@ export const DocumentProvider = ({ children }: DocumentProviderProps) => {
  * @returns setCurrentDoc - The setter function for the current document state variable
  * @returns handleLoadDocs - Loads a json file from the users side and replaces the current documents with it
  * @returns handleFileUpload - Handles the uploading of a .md file or a json file
+ * @returns handleReOrderDocs - Handles the updating of the documents on drag and drop
  */
 export const useDocumentContext = () => {
   const context = useContext(DocumentContext);

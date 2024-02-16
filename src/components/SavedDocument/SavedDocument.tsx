@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Draggable } from 'react-beautiful-dnd';
 
 import DocumentIcon from '../../assets/icon-document.svg';
 import { DocumentType } from '../../types/documentType';
@@ -7,31 +8,43 @@ import { useDocumentContext } from '../../contexts/DocumentsContext';
 
 type SavedDocumentProps = {
   document: DocumentType;
+  index: number;
 };
 
 /**
  * A saved document
  * @param document - A single markdown document
+ * @param index - The list items index, used for the drag and drop library
  */
-function SavedDocument({ document }: SavedDocumentProps) {
+function SavedDocument({ document, index }: SavedDocumentProps) {
   const { handleLoadDoc } = useDocumentContext();
 
   const { id, name, createdAt } = document;
 
   return (
-    <Li>
-      <DocumentIconWrapper>
-        <img src={DocumentIcon} alt='Document Icon' />
-      </DocumentIconWrapper>
-      <Button
-        onClick={() => {
-          handleLoadDoc(id);
-        }}
-      >
-        <Time>{createdAt}</Time>
-        <Span>{name}</Span>
-      </Button>
-    </Li>
+    <Draggable draggableId={id} key={id} index={index}>
+      {(provided) => {
+        return (
+          <Li
+            {...provided.dragHandleProps}
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+          >
+            <DocumentIconWrapper>
+              <img src={DocumentIcon} alt='Document Icon' />
+            </DocumentIconWrapper>
+            <Button
+              onClick={() => {
+                handleLoadDoc(id);
+              }}
+            >
+              <Time>{createdAt}</Time>
+              <Span>{name}</Span>
+            </Button>
+          </Li>
+        );
+      }}
+    </Draggable>
   );
 }
 

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import PreviewToggleButton from '../PreviewToggleButton';
 import { useDocumentContext } from '../../contexts/DocumentsContext';
 import useSaveShortcut from '../../hooks/useSaveShortcut';
+import FontSelect from '../FontSelect';
 
 type MarkdownEditorProps = {
   isPreviewOpen: boolean;
@@ -22,6 +23,12 @@ const MarkdownEditor = ({
 }: MarkdownEditorProps) => {
   const { currentDoc, markdown, handleSaveDoc, handleMarkdownChange, docName } =
     useDocumentContext();
+
+  const [fontFamily, setFontFamily] = useState<string>('Dancing Script'); // default font
+
+  const handleFontChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFontFamily(event.target.value);
+  };
 
   const saveDocument = () => {
     if (currentDoc) {
@@ -47,12 +54,17 @@ const MarkdownEditor = ({
         <label htmlFor='markdown-editor' className='sr-only'>
           Markdown Editor
         </label>
+        <FontSelect
+          fontFamily={fontFamily}
+          handleFontChange={handleFontChange}
+        />
         <StyledTextarea
           value={markdown}
           onChange={handleMarkdownChange}
           aria-label='Markdown editor'
           placeholder='Write your markdown here...'
           id='markdown-editor'
+          style={{ fontFamily }}
         />
       </EditorContainer>
     </Wrapper>

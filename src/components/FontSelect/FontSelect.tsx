@@ -15,6 +15,10 @@ const fonts = [
   'Times New Roman',
   'Courier New',
   'Lucida Console',
+  'Georgia',
+  'Tahoma',
+  'Trebuchet MS',
+  'Comic Sans MS',
 ];
 
 /**

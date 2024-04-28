@@ -52,6 +52,7 @@ export const lightTheme = {
   editorSeparator: '#E4E4E4',
   togglePreviewDefault: '#7C8187',
   togglePreviewActive: '#E46643',
+  fontSelect: '#E46643',
 
   //*********************
   //  PREVIEW STYLES
@@ -117,6 +118,7 @@ export const darkTheme = {
   editorSeparator: '#5A6069',
   togglePreviewDefault: '#C1C4CB',
   togglePreviewActive: '#E46643',
+  fontSelect: '#E46643',
 
   //*********************
   //  PREVIEW STYLES
